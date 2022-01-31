@@ -39,7 +39,7 @@ enables easier modification of the code.
 
 ## Setup the directory structure for the Jupyter notebook
 
-
+Set BASE environmental variable to where you will put your Roman directory. 
 `export BASE="/Users/gwalth/Roman"`
 
 
@@ -58,6 +58,7 @@ mkdir ${GRIZLI}/iref
 mkdir ${GRIZLI}/jref
 ```
 
+Make the directories where your simulated files will live.  Prep and Extractions are hard coded in the notebook.
 ```
 mkdir ${BASE}/my_roman_sims
 mkdir ${BASE}/my_roman_sims/Prep
@@ -66,39 +67,37 @@ mkdir ${BASE}/my_roman_sims/Extractions
 
 ## Download Files
 ### Direct image
-https://drive.google.com/file/d/1hH9NYz5FQ51rLKbifFB8IGeTEqdq0rP7/view?usp=drive_web
+https://drive.google.com/file/d/1hH9NYz5FQ51rLKbifFB8IGeTEqdq0rP7/view?usp=sharing
 ### Slitless spectra
-https://drive.google.com/file/d/1vlNAcJaOd8S27QkNjW6kWWyd_7_DmIkm/view?usp=drive_web
+https://drive.google.com/file/d/1vlNAcJaOd8S27QkNjW6kWWyd_7_DmIkm/view?usp=sharing
 ### Primer catalog
-https://drive.google.com/file/d/10RkOCTSFrgGsxY0wrsimuiv53qMC8rTa/view?usp=drive_web
+https://drive.google.com/file/d/10RkOCTSFrgGsxY0wrsimuiv53qMC8rTa/view?usp=sharing
+### CONF files
+https://drive.google.com/file/d/1R2UWGL1M9Q3HrdZXVsH1Rwx-k4PkaNXi/view?usp=sharing
+### SE files
+https://drive.google.com/file/d/1BHPsQtHg_r2glOF6_LitsVrOCidDaC4E/view?usp=sharing
 
 
 ## Copy the necessary files
 
+ Copy configurations files for the Roman grism
 ```
 cd ${BASE}
+tar -xvf ~/Downloads/Roman_grizli_conf_glw_v1.tar
+```
+Copy the SExtractor parameter files for Roman
+```
+cd ${BASE}/my_roman_sims
+tar -xvf ~/Downloads/Roman_prep_glw_v1.tar
 ```
 
+Copy direct image, slitless spectra and primer catalog to your working directory
 ```
-cp ~/data/Roman/grizli/grizli/CONF/Roman.G150*conf           grizli/CONF
-cp ~/data/Roman/grizli/grizli/CONF/sens_0720_2020.fits       grizli/CONF
-cp ~/data/Roman/grizli/grizli/CONF/Roman.G150.v1.6.sens.fits grizli/CONF
+cd ${BASE}/my_roman_sims/Prep
+cp ~/Downloads/Roman_ATLAS_1deg_*_direct.fits .
+cp ~/Downloads/Roman_ATLAS_1deg_*_slitless.fits .
+cp ~/Downloads/ATLAS_1deg_primer_*.cat .
 ```
-
-
-
-```
-cp ~/Downloads/Roman_ptg01_WFI_G150_random_*  my_roman_sims/Prep
-cp ~/data/Roman/grizli/my_roman_sims/Prep/ATLAS_1deg_subsample_primer_random.lis my_roman_sims/Prep
-```
-
-```
-cp ~/data/Roman/grizli/my_roman_sims/Prep/Roman.param .
-cp ~/data/Roman/grizli/my_roman_sims/Prep/Roman.sex .
-cp ~/data/Roman/grizli/my_roman_sims/Prep/gauss_5.0_9x9.conv .
-cp ~/data/Roman/grizli/my_roman_sims/Prep/default.nnw .
-```
-
 
 ## Running the notebook
 
