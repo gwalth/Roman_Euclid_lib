@@ -1,0 +1,1671 @@
+WARNING:astroquery:VerifyWarning: Card is too long, comment will be truncated.
+WARNING:astroquery:VerifyWarning: Verification reported errors:
+WARNING:astroquery:VerifyWarning: HDU 6:
+WARNING:astroquery:VerifyWarning:     'NAXIS1' card at the wrong place (card 13).  Fixed by moving it to the right place (card 3).
+WARNING:astroquery:VerifyWarning:     'NAXIS2' card at the wrong place (card 14).  Fixed by moving it to the right place (card 4).
+WARNING:astroquery:VerifyWarning: HDU 7:
+WARNING:astroquery:VerifyWarning: HDU 8:
+WARNING:astroquery:VerifyWarning: HDU 9:
+WARNING:astroquery:VerifyWarning: HDU 10:
+WARNING:astroquery:VerifyWarning: HDU 11:
+WARNING:astroquery:VerifyWarning: Note: astropy.io.fits uses zero-based indexing.
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:1352: RuntimeWarning: invalid value encountered in divide
+  info['sn_{0}'.format(line)] = info['flux_'+line]/info['err_'+line]
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4582: RuntimeWarning: divide by zero encountered in divide
+  outwht = 1/outvar
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4582: RuntimeWarning: divide by zero encountered in divide
+  outwht = 1/outvar
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py:682: RuntimeWarning: invalid value encountered in divide
+  self.optimal_profile = m/m.sum(axis=0)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/utils.py:3600: RuntimeWarning: invalid value encountered in divide
+  ew_i = np.trapz((line/continuum)[:, mask],
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py:732: RuntimeWarning: invalid value encountered in divide
+  opt_flux = num.sum(axis=0)/den.sum(axis=0)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py:733: RuntimeWarning: divide by zero encountered in divide
+  opt_var = 1./den.sum(axis=0)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:4027: RuntimeWarning: invalid value encountered in multiply
+  ymin = np.minimum(ymin, np.percentile((flm-er*0.)[clip],
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:4132: RuntimeWarning: divide by zero encountered in divide
+  unit_corr = 1./sp_flat[g]['flux']/1.e-19  # /pscale
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:4134: RuntimeWarning: invalid value encountered in multiply
+  flux = (sp_data[g]['flux']*unit_corr/pscale)[clip]
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:4135: RuntimeWarning: invalid value encountered in multiply
+  err = (sp_data[g]['err']*unit_corr/pscale)[clip]
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:astroquery:VerifyWarning: Card is too long, comment will be truncated.
+WARNING:astroquery:VerifyWarning: Verification reported errors:
+WARNING:astroquery:VerifyWarning: HDU 6:
+WARNING:astroquery:VerifyWarning:     'NAXIS1' card at the wrong place (card 13).  Fixed by moving it to the right place (card 3).
+WARNING:astroquery:VerifyWarning:     'NAXIS2' card at the wrong place (card 14).  Fixed by moving it to the right place (card 4).
+WARNING:astroquery:VerifyWarning: HDU 7:
+WARNING:astroquery:VerifyWarning: HDU 8:
+WARNING:astroquery:VerifyWarning: HDU 9:
+WARNING:astroquery:VerifyWarning: HDU 10:
+WARNING:astroquery:VerifyWarning: HDU 11:
+WARNING:astroquery:VerifyWarning: HDU 12:
+WARNING:astroquery:VerifyWarning: HDU 13:
+WARNING:astroquery:VerifyWarning: HDU 14:
+WARNING:astroquery:VerifyWarning: HDU 15:
+WARNING:astroquery:VerifyWarning: HDU 16:
+WARNING:astroquery:VerifyWarning: HDU 17:
+WARNING:astroquery:VerifyWarning: HDU 18:
+WARNING:astroquery:VerifyWarning: HDU 19:
+WARNING:astroquery:VerifyWarning: HDU 20:
+WARNING:astroquery:VerifyWarning: HDU 21:
+WARNING:astroquery:VerifyWarning: HDU 22:
+WARNING:astroquery:VerifyWarning: HDU 23:
+WARNING:astroquery:VerifyWarning: HDU 24:
+WARNING:astroquery:VerifyWarning: HDU 25:
+WARNING:astroquery:VerifyWarning: HDU 26:
+WARNING:astroquery:VerifyWarning: HDU 27:
+WARNING:astroquery:VerifyWarning: HDU 28:
+WARNING:astroquery:VerifyWarning: HDU 29:
+WARNING:astroquery:VerifyWarning: HDU 30:
+WARNING:astroquery:VerifyWarning: HDU 31:
+WARNING:astroquery:VerifyWarning: HDU 32:
+WARNING:astroquery:VerifyWarning: HDU 33:
+WARNING:astroquery:VerifyWarning: HDU 34:
+WARNING:astroquery:VerifyWarning: HDU 35:
+WARNING:astroquery:VerifyWarning: HDU 36:
+WARNING:astroquery:VerifyWarning: HDU 37:
+WARNING:astroquery:VerifyWarning: HDU 38:
+WARNING:astroquery:VerifyWarning: HDU 39:
+WARNING:astroquery:VerifyWarning: HDU 40:
+WARNING:astroquery:VerifyWarning: HDU 41:
+WARNING:astroquery:VerifyWarning: HDU 42:
+WARNING:astroquery:VerifyWarning: HDU 43:
+WARNING:astroquery:VerifyWarning: HDU 44:
+WARNING:astroquery:VerifyWarning: HDU 45:
+WARNING:astroquery:VerifyWarning: HDU 46:
+WARNING:astroquery:VerifyWarning: HDU 47:
+WARNING:astroquery:VerifyWarning: Note: astropy.io.fits uses zero-based indexing.
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:1352: RuntimeWarning: invalid value encountered in divide
+  info['sn_{0}'.format(line)] = info['flux_'+line]/info['err_'+line]
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:1622: RuntimeWarning: divide by zero encountered in divide
+  ivar = 1./(1/b.ivar + (self.sys_err*sciu)**2)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:1622: RuntimeWarning: divide by zero encountered in divide
+  ivar = 1./(1/b.ivar + (self.sys_err*sciu)**2)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py:682: RuntimeWarning: invalid value encountered in divide
+  self.optimal_profile = m/m.sum(axis=0)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/utils.py:3600: RuntimeWarning: invalid value encountered in divide
+  ew_i = np.trapz((line/continuum)[:, mask],
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py:732: RuntimeWarning: invalid value encountered in divide
+  opt_flux = num.sum(axis=0)/den.sum(axis=0)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py:733: RuntimeWarning: divide by zero encountered in divide
+  opt_var = 1./den.sum(axis=0)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:4027: RuntimeWarning: invalid value encountered in multiply
+  ymin = np.minimum(ymin, np.percentile((flm-er*0.)[clip],
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:4132: RuntimeWarning: divide by zero encountered in divide
+  unit_corr = 1./sp_flat[g]['flux']/1.e-19  # /pscale
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:4134: RuntimeWarning: invalid value encountered in multiply
+  flux = (sp_data[g]['flux']*unit_corr/pscale)[clip]
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:4135: RuntimeWarning: invalid value encountered in multiply
+  err = (sp_data[g]['err']*unit_corr/pscale)[clip]
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:astroquery:VerifyWarning: Card is too long, comment will be truncated.
+WARNING:astroquery:VerifyWarning: Verification reported errors:
+WARNING:astroquery:VerifyWarning: HDU 6:
+WARNING:astroquery:VerifyWarning:     'NAXIS1' card at the wrong place (card 13).  Fixed by moving it to the right place (card 3).
+WARNING:astroquery:VerifyWarning:     'NAXIS2' card at the wrong place (card 14).  Fixed by moving it to the right place (card 4).
+WARNING:astroquery:VerifyWarning: HDU 7:
+WARNING:astroquery:VerifyWarning: HDU 8:
+WARNING:astroquery:VerifyWarning: HDU 9:
+WARNING:astroquery:VerifyWarning: HDU 10:
+WARNING:astroquery:VerifyWarning: HDU 11:
+WARNING:astroquery:VerifyWarning: HDU 12:
+WARNING:astroquery:VerifyWarning: HDU 13:
+WARNING:astroquery:VerifyWarning: HDU 14:
+WARNING:astroquery:VerifyWarning: HDU 15:
+WARNING:astroquery:VerifyWarning: HDU 16:
+WARNING:astroquery:VerifyWarning: HDU 17:
+WARNING:astroquery:VerifyWarning: HDU 18:
+WARNING:astroquery:VerifyWarning: HDU 19:
+WARNING:astroquery:VerifyWarning: HDU 20:
+WARNING:astroquery:VerifyWarning: HDU 21:
+WARNING:astroquery:VerifyWarning: HDU 22:
+WARNING:astroquery:VerifyWarning: HDU 23:
+WARNING:astroquery:VerifyWarning: HDU 24:
+WARNING:astroquery:VerifyWarning: HDU 25:
+WARNING:astroquery:VerifyWarning: HDU 26:
+WARNING:astroquery:VerifyWarning: HDU 27:
+WARNING:astroquery:VerifyWarning: HDU 28:
+WARNING:astroquery:VerifyWarning: HDU 29:
+WARNING:astroquery:VerifyWarning: HDU 30:
+WARNING:astroquery:VerifyWarning: HDU 31:
+WARNING:astroquery:VerifyWarning: Note: astropy.io.fits uses zero-based indexing.
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:1352: RuntimeWarning: invalid value encountered in divide
+  info['sn_{0}'.format(line)] = info['flux_'+line]/info['err_'+line]
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4582: RuntimeWarning: divide by zero encountered in divide
+  outwht = 1/outvar
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4582: RuntimeWarning: divide by zero encountered in divide
+  outwht = 1/outvar
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:1622: RuntimeWarning: divide by zero encountered in divide
+  ivar = 1./(1/b.ivar + (self.sys_err*sciu)**2)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:1622: RuntimeWarning: divide by zero encountered in divide
+  ivar = 1./(1/b.ivar + (self.sys_err*sciu)**2)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py:682: RuntimeWarning: invalid value encountered in divide
+  self.optimal_profile = m/m.sum(axis=0)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/utils.py:3600: RuntimeWarning: invalid value encountered in divide
+  ew_i = np.trapz((line/continuum)[:, mask],
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py:732: RuntimeWarning: invalid value encountered in divide
+  opt_flux = num.sum(axis=0)/den.sum(axis=0)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py:733: RuntimeWarning: divide by zero encountered in divide
+  opt_var = 1./den.sum(axis=0)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:4027: RuntimeWarning: invalid value encountered in multiply
+  ymin = np.minimum(ymin, np.percentile((flm-er*0.)[clip],
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:4132: RuntimeWarning: divide by zero encountered in divide
+  unit_corr = 1./sp_flat[g]['flux']/1.e-19  # /pscale
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:4134: RuntimeWarning: invalid value encountered in multiply
+  flux = (sp_data[g]['flux']*unit_corr/pscale)[clip]
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:4135: RuntimeWarning: invalid value encountered in multiply
+  err = (sp_data[g]['err']*unit_corr/pscale)[clip]
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:astroquery:VerifyWarning: Card is too long, comment will be truncated.
+WARNING:astroquery:VerifyWarning: Verification reported errors:
+WARNING:astroquery:VerifyWarning: HDU 6:
+WARNING:astroquery:VerifyWarning:     'NAXIS1' card at the wrong place (card 13).  Fixed by moving it to the right place (card 3).
+WARNING:astroquery:VerifyWarning:     'NAXIS2' card at the wrong place (card 14).  Fixed by moving it to the right place (card 4).
+WARNING:astroquery:VerifyWarning: HDU 7:
+WARNING:astroquery:VerifyWarning: HDU 8:
+WARNING:astroquery:VerifyWarning: HDU 9:
+WARNING:astroquery:VerifyWarning: HDU 10:
+WARNING:astroquery:VerifyWarning: HDU 11:
+WARNING:astroquery:VerifyWarning: HDU 12:
+WARNING:astroquery:VerifyWarning: HDU 13:
+WARNING:astroquery:VerifyWarning: HDU 14:
+WARNING:astroquery:VerifyWarning: HDU 15:
+WARNING:astroquery:VerifyWarning: HDU 16:
+WARNING:astroquery:VerifyWarning: HDU 17:
+WARNING:astroquery:VerifyWarning: HDU 18:
+WARNING:astroquery:VerifyWarning: HDU 19:
+WARNING:astroquery:VerifyWarning: HDU 20:
+WARNING:astroquery:VerifyWarning: HDU 21:
+WARNING:astroquery:VerifyWarning: HDU 22:
+WARNING:astroquery:VerifyWarning: HDU 23:
+WARNING:astroquery:VerifyWarning: HDU 24:
+WARNING:astroquery:VerifyWarning: HDU 25:
+WARNING:astroquery:VerifyWarning: HDU 26:
+WARNING:astroquery:VerifyWarning: HDU 27:
+WARNING:astroquery:VerifyWarning: Note: astropy.io.fits uses zero-based indexing.
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:1352: RuntimeWarning: invalid value encountered in divide
+  info['sn_{0}'.format(line)] = info['flux_'+line]/info['err_'+line]
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4582: RuntimeWarning: divide by zero encountered in divide
+  outwht = 1/outvar
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4582: RuntimeWarning: divide by zero encountered in divide
+  outwht = 1/outvar
+
+ERROR:root:Problem fitting id = 19515
+Traceback (most recent call last):
+  File "/Users/gwalth/data/Roman/grizli/notebooks/Grizli_Euclid_5_fit_redshifts.py", line 111, in <module>
+    cutout = grizli.model.BeamCutout(Euclid, b['A'], min_sens=0,) # min_mask=0)
+  File "/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py", line 3919, in __init__
+    self.init_from_input(flt, beam, conf, get_slice_header)
+  File "/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py", line 4082, in init_from_input
+    self.grism = flt.grism.get_slice(self.beam.slx_parent,
+  File "/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py", line 2166, in get_slice
+    raise ValueError('Out of range in x')
+ValueError: Out of range in x
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py:682: RuntimeWarning: invalid value encountered in divide
+  self.optimal_profile = m/m.sum(axis=0)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/utils.py:3600: RuntimeWarning: invalid value encountered in divide
+  ew_i = np.trapz((line/continuum)[:, mask],
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py:732: RuntimeWarning: invalid value encountered in divide
+  opt_flux = num.sum(axis=0)/den.sum(axis=0)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py:733: RuntimeWarning: divide by zero encountered in divide
+  opt_var = 1./den.sum(axis=0)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:4027: RuntimeWarning: invalid value encountered in multiply
+  ymin = np.minimum(ymin, np.percentile((flm-er*0.)[clip],
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:4132: RuntimeWarning: divide by zero encountered in divide
+  unit_corr = 1./sp_flat[g]['flux']/1.e-19  # /pscale
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:4134: RuntimeWarning: invalid value encountered in multiply
+  flux = (sp_data[g]['flux']*unit_corr/pscale)[clip]
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:4135: RuntimeWarning: invalid value encountered in multiply
+  err = (sp_data[g]['err']*unit_corr/pscale)[clip]
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:astroquery:VerifyWarning: Card is too long, comment will be truncated.
+WARNING:astroquery:VerifyWarning: Verification reported errors:
+WARNING:astroquery:VerifyWarning: HDU 6:
+WARNING:astroquery:VerifyWarning:     'NAXIS1' card at the wrong place (card 13).  Fixed by moving it to the right place (card 3).
+WARNING:astroquery:VerifyWarning:     'NAXIS2' card at the wrong place (card 14).  Fixed by moving it to the right place (card 4).
+WARNING:astroquery:VerifyWarning: HDU 7:
+WARNING:astroquery:VerifyWarning: HDU 8:
+WARNING:astroquery:VerifyWarning: HDU 9:
+WARNING:astroquery:VerifyWarning: HDU 10:
+WARNING:astroquery:VerifyWarning: HDU 11:
+WARNING:astroquery:VerifyWarning: HDU 12:
+WARNING:astroquery:VerifyWarning: HDU 13:
+WARNING:astroquery:VerifyWarning: HDU 14:
+WARNING:astroquery:VerifyWarning: HDU 15:
+WARNING:astroquery:VerifyWarning: HDU 16:
+WARNING:astroquery:VerifyWarning: HDU 17:
+WARNING:astroquery:VerifyWarning: HDU 18:
+WARNING:astroquery:VerifyWarning: HDU 19:
+WARNING:astroquery:VerifyWarning: HDU 20:
+WARNING:astroquery:VerifyWarning: HDU 21:
+WARNING:astroquery:VerifyWarning: HDU 22:
+WARNING:astroquery:VerifyWarning: HDU 23:
+WARNING:astroquery:VerifyWarning: HDU 24:
+WARNING:astroquery:VerifyWarning: HDU 25:
+WARNING:astroquery:VerifyWarning: HDU 26:
+WARNING:astroquery:VerifyWarning: HDU 27:
+WARNING:astroquery:VerifyWarning: HDU 28:
+WARNING:astroquery:VerifyWarning: HDU 29:
+WARNING:astroquery:VerifyWarning: HDU 30:
+WARNING:astroquery:VerifyWarning: HDU 31:
+WARNING:astroquery:VerifyWarning: HDU 32:
+WARNING:astroquery:VerifyWarning: HDU 33:
+WARNING:astroquery:VerifyWarning: HDU 34:
+WARNING:astroquery:VerifyWarning: HDU 35:
+WARNING:astroquery:VerifyWarning: HDU 36:
+WARNING:astroquery:VerifyWarning: HDU 37:
+WARNING:astroquery:VerifyWarning: HDU 38:
+WARNING:astroquery:VerifyWarning: HDU 39:
+WARNING:astroquery:VerifyWarning: HDU 40:
+WARNING:astroquery:VerifyWarning: HDU 41:
+WARNING:astroquery:VerifyWarning: HDU 42:
+WARNING:astroquery:VerifyWarning: HDU 43:
+WARNING:astroquery:VerifyWarning: HDU 44:
+WARNING:astroquery:VerifyWarning: HDU 45:
+WARNING:astroquery:VerifyWarning: HDU 46:
+WARNING:astroquery:VerifyWarning: HDU 47:
+WARNING:astroquery:VerifyWarning: HDU 48:
+WARNING:astroquery:VerifyWarning: HDU 49:
+WARNING:astroquery:VerifyWarning: HDU 50:
+WARNING:astroquery:VerifyWarning: HDU 51:
+WARNING:astroquery:VerifyWarning: HDU 52:
+WARNING:astroquery:VerifyWarning: HDU 53:
+WARNING:astroquery:VerifyWarning: HDU 54:
+WARNING:astroquery:VerifyWarning: HDU 55:
+WARNING:astroquery:VerifyWarning: Note: astropy.io.fits uses zero-based indexing.
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:1352: RuntimeWarning: invalid value encountered in divide
+  info['sn_{0}'.format(line)] = info['flux_'+line]/info['err_'+line]
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:1622: RuntimeWarning: divide by zero encountered in divide
+  ivar = 1./(1/b.ivar + (self.sys_err*sciu)**2)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:1622: RuntimeWarning: divide by zero encountered in divide
+  ivar = 1./(1/b.ivar + (self.sys_err*sciu)**2)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py:682: RuntimeWarning: invalid value encountered in divide
+  self.optimal_profile = m/m.sum(axis=0)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/utils.py:3600: RuntimeWarning: invalid value encountered in divide
+  ew_i = np.trapz((line/continuum)[:, mask],
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py:732: RuntimeWarning: invalid value encountered in divide
+  opt_flux = num.sum(axis=0)/den.sum(axis=0)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py:733: RuntimeWarning: divide by zero encountered in divide
+  opt_var = 1./den.sum(axis=0)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:4027: RuntimeWarning: invalid value encountered in multiply
+  ymin = np.minimum(ymin, np.percentile((flm-er*0.)[clip],
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:4132: RuntimeWarning: divide by zero encountered in divide
+  unit_corr = 1./sp_flat[g]['flux']/1.e-19  # /pscale
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:4134: RuntimeWarning: invalid value encountered in multiply
+  flux = (sp_data[g]['flux']*unit_corr/pscale)[clip]
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:4135: RuntimeWarning: invalid value encountered in multiply
+  err = (sp_data[g]['err']*unit_corr/pscale)[clip]
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:astroquery:VerifyWarning: Card is too long, comment will be truncated.
+WARNING:astroquery:VerifyWarning: Verification reported errors:
+WARNING:astroquery:VerifyWarning: HDU 6:
+WARNING:astroquery:VerifyWarning:     'NAXIS1' card at the wrong place (card 13).  Fixed by moving it to the right place (card 3).
+WARNING:astroquery:VerifyWarning:     'NAXIS2' card at the wrong place (card 14).  Fixed by moving it to the right place (card 4).
+WARNING:astroquery:VerifyWarning: HDU 7:
+WARNING:astroquery:VerifyWarning: HDU 8:
+WARNING:astroquery:VerifyWarning: HDU 9:
+WARNING:astroquery:VerifyWarning: HDU 10:
+WARNING:astroquery:VerifyWarning: HDU 11:
+WARNING:astroquery:VerifyWarning: HDU 12:
+WARNING:astroquery:VerifyWarning: HDU 13:
+WARNING:astroquery:VerifyWarning: HDU 14:
+WARNING:astroquery:VerifyWarning: HDU 15:
+WARNING:astroquery:VerifyWarning: HDU 16:
+WARNING:astroquery:VerifyWarning: HDU 17:
+WARNING:astroquery:VerifyWarning: HDU 18:
+WARNING:astroquery:VerifyWarning: HDU 19:
+WARNING:astroquery:VerifyWarning: HDU 20:
+WARNING:astroquery:VerifyWarning: HDU 21:
+WARNING:astroquery:VerifyWarning: HDU 22:
+WARNING:astroquery:VerifyWarning: HDU 23:
+WARNING:astroquery:VerifyWarning: HDU 24:
+WARNING:astroquery:VerifyWarning: HDU 25:
+WARNING:astroquery:VerifyWarning: HDU 26:
+WARNING:astroquery:VerifyWarning: HDU 27:
+WARNING:astroquery:VerifyWarning: HDU 28:
+WARNING:astroquery:VerifyWarning: HDU 29:
+WARNING:astroquery:VerifyWarning: HDU 30:
+WARNING:astroquery:VerifyWarning: HDU 31:
+WARNING:astroquery:VerifyWarning: HDU 32:
+WARNING:astroquery:VerifyWarning: HDU 33:
+WARNING:astroquery:VerifyWarning: HDU 34:
+WARNING:astroquery:VerifyWarning: HDU 35:
+WARNING:astroquery:VerifyWarning: HDU 36:
+WARNING:astroquery:VerifyWarning: HDU 37:
+WARNING:astroquery:VerifyWarning: HDU 38:
+WARNING:astroquery:VerifyWarning: HDU 39:
+WARNING:astroquery:VerifyWarning: Note: astropy.io.fits uses zero-based indexing.
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:1352: RuntimeWarning: invalid value encountered in divide
+  info['sn_{0}'.format(line)] = info['flux_'+line]/info['err_'+line]
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+ERROR:root:Problem fitting id = 7226
+Traceback (most recent call last):
+  File "/Users/gwalth/data/Roman/grizli/notebooks/Grizli_Euclid_5_fit_redshifts.py", line 111, in <module>
+    cutout = grizli.model.BeamCutout(Euclid, b['A'], min_sens=0,) # min_mask=0)
+  File "/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py", line 3919, in __init__
+    self.init_from_input(flt, beam, conf, get_slice_header)
+  File "/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py", line 4082, in init_from_input
+    self.grism = flt.grism.get_slice(self.beam.slx_parent,
+  File "/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py", line 2166, in get_slice
+    raise ValueError('Out of range in x')
+ValueError: Out of range in x
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py:682: RuntimeWarning: invalid value encountered in divide
+  self.optimal_profile = m/m.sum(axis=0)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/utils.py:3600: RuntimeWarning: invalid value encountered in divide
+  ew_i = np.trapz((line/continuum)[:, mask],
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py:732: RuntimeWarning: invalid value encountered in divide
+  opt_flux = num.sum(axis=0)/den.sum(axis=0)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py:733: RuntimeWarning: divide by zero encountered in divide
+  opt_var = 1./den.sum(axis=0)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:4027: RuntimeWarning: invalid value encountered in multiply
+  ymin = np.minimum(ymin, np.percentile((flm-er*0.)[clip],
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:4132: RuntimeWarning: divide by zero encountered in divide
+  unit_corr = 1./sp_flat[g]['flux']/1.e-19  # /pscale
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:4134: RuntimeWarning: invalid value encountered in multiply
+  flux = (sp_data[g]['flux']*unit_corr/pscale)[clip]
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:4135: RuntimeWarning: invalid value encountered in multiply
+  err = (sp_data[g]['err']*unit_corr/pscale)[clip]
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:astroquery:VerifyWarning: Card is too long, comment will be truncated.
+WARNING:astroquery:VerifyWarning: Verification reported errors:
+WARNING:astroquery:VerifyWarning: HDU 6:
+WARNING:astroquery:VerifyWarning:     'NAXIS1' card at the wrong place (card 13).  Fixed by moving it to the right place (card 3).
+WARNING:astroquery:VerifyWarning:     'NAXIS2' card at the wrong place (card 14).  Fixed by moving it to the right place (card 4).
+WARNING:astroquery:VerifyWarning: HDU 7:
+WARNING:astroquery:VerifyWarning: HDU 8:
+WARNING:astroquery:VerifyWarning: HDU 9:
+WARNING:astroquery:VerifyWarning: HDU 10:
+WARNING:astroquery:VerifyWarning: HDU 11:
+WARNING:astroquery:VerifyWarning: HDU 12:
+WARNING:astroquery:VerifyWarning: HDU 13:
+WARNING:astroquery:VerifyWarning: HDU 14:
+WARNING:astroquery:VerifyWarning: HDU 15:
+WARNING:astroquery:VerifyWarning: HDU 16:
+WARNING:astroquery:VerifyWarning: HDU 17:
+WARNING:astroquery:VerifyWarning: HDU 18:
+WARNING:astroquery:VerifyWarning: HDU 19:
+WARNING:astroquery:VerifyWarning: HDU 20:
+WARNING:astroquery:VerifyWarning: HDU 21:
+WARNING:astroquery:VerifyWarning: HDU 22:
+WARNING:astroquery:VerifyWarning: HDU 23:
+WARNING:astroquery:VerifyWarning: HDU 24:
+WARNING:astroquery:VerifyWarning: HDU 25:
+WARNING:astroquery:VerifyWarning: HDU 26:
+WARNING:astroquery:VerifyWarning: HDU 27:
+WARNING:astroquery:VerifyWarning: HDU 28:
+WARNING:astroquery:VerifyWarning: HDU 29:
+WARNING:astroquery:VerifyWarning: HDU 30:
+WARNING:astroquery:VerifyWarning: HDU 31:
+WARNING:astroquery:VerifyWarning: HDU 32:
+WARNING:astroquery:VerifyWarning: HDU 33:
+WARNING:astroquery:VerifyWarning: HDU 34:
+WARNING:astroquery:VerifyWarning: HDU 35:
+WARNING:astroquery:VerifyWarning: HDU 36:
+WARNING:astroquery:VerifyWarning: HDU 37:
+WARNING:astroquery:VerifyWarning: HDU 38:
+WARNING:astroquery:VerifyWarning: HDU 39:
+WARNING:astroquery:VerifyWarning: HDU 40:
+WARNING:astroquery:VerifyWarning: HDU 41:
+WARNING:astroquery:VerifyWarning: HDU 42:
+WARNING:astroquery:VerifyWarning: HDU 43:
+WARNING:astroquery:VerifyWarning: HDU 44:
+WARNING:astroquery:VerifyWarning: HDU 45:
+WARNING:astroquery:VerifyWarning: HDU 46:
+WARNING:astroquery:VerifyWarning: HDU 47:
+WARNING:astroquery:VerifyWarning: HDU 48:
+WARNING:astroquery:VerifyWarning: HDU 49:
+WARNING:astroquery:VerifyWarning: HDU 50:
+WARNING:astroquery:VerifyWarning: HDU 51:
+WARNING:astroquery:VerifyWarning: HDU 52:
+WARNING:astroquery:VerifyWarning: HDU 53:
+WARNING:astroquery:VerifyWarning: HDU 54:
+WARNING:astroquery:VerifyWarning: HDU 55:
+WARNING:astroquery:VerifyWarning: HDU 56:
+WARNING:astroquery:VerifyWarning: HDU 57:
+WARNING:astroquery:VerifyWarning: HDU 58:
+WARNING:astroquery:VerifyWarning: HDU 59:
+WARNING:astroquery:VerifyWarning: Note: astropy.io.fits uses zero-based indexing.
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:1352: RuntimeWarning: invalid value encountered in divide
+  info['sn_{0}'.format(line)] = info['flux_'+line]/info['err_'+line]
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:4686: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`). Consider using `matplotlib.pyplot.close()`.
+  fig = plt.figure(figsize=[xsize, 3.4])
+
+ERROR:root:Problem fitting id = 10844
+Traceback (most recent call last):
+  File "/Users/gwalth/data/Roman/grizli/notebooks/Grizli_Euclid_5_fit_redshifts.py", line 111, in <module>
+    cutout = grizli.model.BeamCutout(Euclid, b['A'], min_sens=0,) # min_mask=0)
+  File "/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py", line 3919, in __init__
+    self.init_from_input(flt, beam, conf, get_slice_header)
+  File "/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py", line 4082, in init_from_input
+    self.grism = flt.grism.get_slice(self.beam.slx_parent,
+  File "/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py", line 2166, in get_slice
+    raise ValueError('Out of range in x')
+ValueError: Out of range in x
+ERROR:root:Problem fitting id = 12982
+Traceback (most recent call last):
+  File "/Users/gwalth/data/Roman/grizli/notebooks/Grizli_Euclid_5_fit_redshifts.py", line 111, in <module>
+    cutout = grizli.model.BeamCutout(Euclid, b['A'], min_sens=0,) # min_mask=0)
+  File "/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py", line 3919, in __init__
+    self.init_from_input(flt, beam, conf, get_slice_header)
+  File "/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py", line 4082, in init_from_input
+    self.grism = flt.grism.get_slice(self.beam.slx_parent,
+  File "/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py", line 2166, in get_slice
+    raise ValueError('Out of range in x')
+ValueError: Out of range in x
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:1622: RuntimeWarning: divide by zero encountered in divide
+  ivar = 1./(1/b.ivar + (self.sys_err*sciu)**2)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:1622: RuntimeWarning: divide by zero encountered in divide
+  ivar = 1./(1/b.ivar + (self.sys_err*sciu)**2)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py:682: RuntimeWarning: invalid value encountered in divide
+  self.optimal_profile = m/m.sum(axis=0)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/utils.py:3600: RuntimeWarning: invalid value encountered in divide
+  ew_i = np.trapz((line/continuum)[:, mask],
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py:732: RuntimeWarning: invalid value encountered in divide
+  opt_flux = num.sum(axis=0)/den.sum(axis=0)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py:733: RuntimeWarning: divide by zero encountered in divide
+  opt_var = 1./den.sum(axis=0)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:4027: RuntimeWarning: invalid value encountered in multiply
+  ymin = np.minimum(ymin, np.percentile((flm-er*0.)[clip],
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:4132: RuntimeWarning: divide by zero encountered in divide
+  unit_corr = 1./sp_flat[g]['flux']/1.e-19  # /pscale
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:4134: RuntimeWarning: invalid value encountered in multiply
+  flux = (sp_data[g]['flux']*unit_corr/pscale)[clip]
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:4135: RuntimeWarning: invalid value encountered in multiply
+  err = (sp_data[g]['err']*unit_corr/pscale)[clip]
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:astroquery:VerifyWarning: Card is too long, comment will be truncated.
+WARNING:astroquery:VerifyWarning: Verification reported errors:
+WARNING:astroquery:VerifyWarning: HDU 6:
+WARNING:astroquery:VerifyWarning:     'NAXIS1' card at the wrong place (card 13).  Fixed by moving it to the right place (card 3).
+WARNING:astroquery:VerifyWarning:     'NAXIS2' card at the wrong place (card 14).  Fixed by moving it to the right place (card 4).
+WARNING:astroquery:VerifyWarning: HDU 7:
+WARNING:astroquery:VerifyWarning: HDU 8:
+WARNING:astroquery:VerifyWarning: HDU 9:
+WARNING:astroquery:VerifyWarning: HDU 10:
+WARNING:astroquery:VerifyWarning: HDU 11:
+WARNING:astroquery:VerifyWarning: HDU 12:
+WARNING:astroquery:VerifyWarning: HDU 13:
+WARNING:astroquery:VerifyWarning: HDU 14:
+WARNING:astroquery:VerifyWarning: HDU 15:
+WARNING:astroquery:VerifyWarning: HDU 16:
+WARNING:astroquery:VerifyWarning: HDU 17:
+WARNING:astroquery:VerifyWarning: HDU 18:
+WARNING:astroquery:VerifyWarning: HDU 19:
+WARNING:astroquery:VerifyWarning: HDU 20:
+WARNING:astroquery:VerifyWarning: HDU 21:
+WARNING:astroquery:VerifyWarning: HDU 22:
+WARNING:astroquery:VerifyWarning: HDU 23:
+WARNING:astroquery:VerifyWarning: HDU 24:
+WARNING:astroquery:VerifyWarning: HDU 25:
+WARNING:astroquery:VerifyWarning: HDU 26:
+WARNING:astroquery:VerifyWarning: HDU 27:
+WARNING:astroquery:VerifyWarning: HDU 28:
+WARNING:astroquery:VerifyWarning: HDU 29:
+WARNING:astroquery:VerifyWarning: HDU 30:
+WARNING:astroquery:VerifyWarning: HDU 31:
+WARNING:astroquery:VerifyWarning: HDU 32:
+WARNING:astroquery:VerifyWarning: HDU 33:
+WARNING:astroquery:VerifyWarning: HDU 34:
+WARNING:astroquery:VerifyWarning: HDU 35:
+WARNING:astroquery:VerifyWarning: HDU 36:
+WARNING:astroquery:VerifyWarning: HDU 37:
+WARNING:astroquery:VerifyWarning: HDU 38:
+WARNING:astroquery:VerifyWarning: HDU 39:
+WARNING:astroquery:VerifyWarning: Note: astropy.io.fits uses zero-based indexing.
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:1352: RuntimeWarning: invalid value encountered in divide
+  info['sn_{0}'.format(line)] = info['flux_'+line]/info['err_'+line]
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4582: RuntimeWarning: divide by zero encountered in divide
+  outwht = 1/outvar
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4582: RuntimeWarning: divide by zero encountered in divide
+  outwht = 1/outvar
+
+ERROR:root:Problem fitting id = 11614
+Traceback (most recent call last):
+  File "/Users/gwalth/data/Roman/grizli/notebooks/Grizli_Euclid_5_fit_redshifts.py", line 111, in <module>
+    cutout = grizli.model.BeamCutout(Euclid, b['A'], min_sens=0,) # min_mask=0)
+  File "/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py", line 3919, in __init__
+    self.init_from_input(flt, beam, conf, get_slice_header)
+  File "/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py", line 4082, in init_from_input
+    self.grism = flt.grism.get_slice(self.beam.slx_parent,
+  File "/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py", line 2166, in get_slice
+    raise ValueError('Out of range in x')
+ValueError: Out of range in x
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:1622: RuntimeWarning: divide by zero encountered in divide
+  ivar = 1./(1/b.ivar + (self.sys_err*sciu)**2)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3732: RuntimeWarning: invalid value encountered in double_scalars
+  return chi2/self.DoF
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:1622: RuntimeWarning: divide by zero encountered in divide
+  ivar = 1./(1/b.ivar + (self.sys_err*sciu)**2)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3732: RuntimeWarning: invalid value encountered in double_scalars
+  return chi2/self.DoF
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py:682: RuntimeWarning: invalid value encountered in divide
+  self.optimal_profile = m/m.sum(axis=0)
+
+ERROR:root:Problem fitting id = 4638
+Traceback (most recent call last):
+  File "/Users/gwalth/data/Roman/grizli/notebooks/Grizli_Euclid_5_fit_redshifts.py", line 132, in <module>
+    fitting.run_all(id, temp0, temp1, fit_only_beams=True, fwhm=fwhm, zr=[0.05, 3.0],
+  File "/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py", line 515, in run_all
+    fit = fit_obj.xfit_redshift(templates=t0, zr=zr, dz=dz, prior=prior, fitter=fitter[0], verbose=verbose, bounded_kwargs=bounded_kwargs, huber_delta=huber_delta, get_student_logpdf=get_student_logpdf)
+  File "/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py", line 2519, in xfit_redshift
+    out = self.xfit_at_z(z=0., templates=tpoly, fitter='lstsq',
+  File "/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py", line 2205, in xfit_at_z
+    background = np.dot(coeffs_i[:self.N], A[:self.N, :]) - pedestal
+  File "<__array_function__ internals>", line 180, in dot
+ValueError: shapes (0,) and (1,0) not aligned: 0 (dim 0) != 1 (dim 0)
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:1622: RuntimeWarning: divide by zero encountered in divide
+  ivar = 1./(1/b.ivar + (self.sys_err*sciu)**2)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:1622: RuntimeWarning: divide by zero encountered in divide
+  ivar = 1./(1/b.ivar + (self.sys_err*sciu)**2)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py:682: RuntimeWarning: invalid value encountered in divide
+  self.optimal_profile = m/m.sum(axis=0)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/utils.py:3600: RuntimeWarning: invalid value encountered in divide
+  ew_i = np.trapz((line/continuum)[:, mask],
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py:732: RuntimeWarning: invalid value encountered in divide
+  opt_flux = num.sum(axis=0)/den.sum(axis=0)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py:733: RuntimeWarning: divide by zero encountered in divide
+  opt_var = 1./den.sum(axis=0)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:4027: RuntimeWarning: invalid value encountered in multiply
+  ymin = np.minimum(ymin, np.percentile((flm-er*0.)[clip],
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:4132: RuntimeWarning: divide by zero encountered in divide
+  unit_corr = 1./sp_flat[g]['flux']/1.e-19  # /pscale
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:4134: RuntimeWarning: invalid value encountered in multiply
+  flux = (sp_data[g]['flux']*unit_corr/pscale)[clip]
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:4135: RuntimeWarning: invalid value encountered in multiply
+  err = (sp_data[g]['err']*unit_corr/pscale)[clip]
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:astroquery:VerifyWarning: Card is too long, comment will be truncated.
+WARNING:astroquery:VerifyWarning: Verification reported errors:
+WARNING:astroquery:VerifyWarning: HDU 6:
+WARNING:astroquery:VerifyWarning:     'NAXIS1' card at the wrong place (card 13).  Fixed by moving it to the right place (card 3).
+WARNING:astroquery:VerifyWarning:     'NAXIS2' card at the wrong place (card 14).  Fixed by moving it to the right place (card 4).
+WARNING:astroquery:VerifyWarning: HDU 7:
+WARNING:astroquery:VerifyWarning: HDU 8:
+WARNING:astroquery:VerifyWarning: HDU 9:
+WARNING:astroquery:VerifyWarning: HDU 10:
+WARNING:astroquery:VerifyWarning: HDU 11:
+WARNING:astroquery:VerifyWarning: HDU 12:
+WARNING:astroquery:VerifyWarning: HDU 13:
+WARNING:astroquery:VerifyWarning: HDU 14:
+WARNING:astroquery:VerifyWarning: HDU 15:
+WARNING:astroquery:VerifyWarning: HDU 16:
+WARNING:astroquery:VerifyWarning: HDU 17:
+WARNING:astroquery:VerifyWarning: HDU 18:
+WARNING:astroquery:VerifyWarning: HDU 19:
+WARNING:astroquery:VerifyWarning: HDU 20:
+WARNING:astroquery:VerifyWarning: HDU 21:
+WARNING:astroquery:VerifyWarning: HDU 22:
+WARNING:astroquery:VerifyWarning: HDU 23:
+WARNING:astroquery:VerifyWarning: HDU 24:
+WARNING:astroquery:VerifyWarning: HDU 25:
+WARNING:astroquery:VerifyWarning: HDU 26:
+WARNING:astroquery:VerifyWarning: HDU 27:
+WARNING:astroquery:VerifyWarning: Note: astropy.io.fits uses zero-based indexing.
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:1352: RuntimeWarning: invalid value encountered in divide
+  info['sn_{0}'.format(line)] = info['flux_'+line]/info['err_'+line]
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4582: RuntimeWarning: divide by zero encountered in divide
+  outwht = 1/outvar
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4582: RuntimeWarning: divide by zero encountered in divide
+  outwht = 1/outvar
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:1622: RuntimeWarning: divide by zero encountered in divide
+  ivar = 1./(1/b.ivar + (self.sys_err*sciu)**2)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:1622: RuntimeWarning: divide by zero encountered in divide
+  ivar = 1./(1/b.ivar + (self.sys_err*sciu)**2)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py:682: RuntimeWarning: invalid value encountered in divide
+  self.optimal_profile = m/m.sum(axis=0)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py:732: RuntimeWarning: invalid value encountered in divide
+  opt_flux = num.sum(axis=0)/den.sum(axis=0)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py:733: RuntimeWarning: divide by zero encountered in divide
+  opt_var = 1./den.sum(axis=0)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:4027: RuntimeWarning: invalid value encountered in multiply
+  ymin = np.minimum(ymin, np.percentile((flm-er*0.)[clip],
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:4132: RuntimeWarning: divide by zero encountered in divide
+  unit_corr = 1./sp_flat[g]['flux']/1.e-19  # /pscale
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:4134: RuntimeWarning: invalid value encountered in multiply
+  flux = (sp_data[g]['flux']*unit_corr/pscale)[clip]
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:4135: RuntimeWarning: invalid value encountered in multiply
+  err = (sp_data[g]['err']*unit_corr/pscale)[clip]
+
+WARNING:astroquery:VerifyWarning: Card is too long, comment will be truncated.
+WARNING:astroquery:VerifyWarning: Verification reported errors:
+WARNING:astroquery:VerifyWarning: HDU 6:
+WARNING:astroquery:VerifyWarning:     'NAXIS1' card at the wrong place (card 13).  Fixed by moving it to the right place (card 3).
+WARNING:astroquery:VerifyWarning:     'NAXIS2' card at the wrong place (card 14).  Fixed by moving it to the right place (card 4).
+WARNING:astroquery:VerifyWarning: HDU 7:
+WARNING:astroquery:VerifyWarning: Note: astropy.io.fits uses zero-based indexing.
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:1352: RuntimeWarning: invalid value encountered in divide
+  info['sn_{0}'.format(line)] = info['flux_'+line]/info['err_'+line]
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4582: RuntimeWarning: divide by zero encountered in divide
+  outwht = 1/outvar
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4582: RuntimeWarning: divide by zero encountered in divide
+  outwht = 1/outvar
+
+ERROR:root:Problem fitting id = 11448
+Traceback (most recent call last):
+  File "/Users/gwalth/data/Roman/grizli/notebooks/Grizli_Euclid_5_fit_redshifts.py", line 111, in <module>
+    cutout = grizli.model.BeamCutout(Euclid, b['A'], min_sens=0,) # min_mask=0)
+  File "/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py", line 3919, in __init__
+    self.init_from_input(flt, beam, conf, get_slice_header)
+  File "/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py", line 4082, in init_from_input
+    self.grism = flt.grism.get_slice(self.beam.slx_parent,
+  File "/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py", line 2166, in get_slice
+    raise ValueError('Out of range in x')
+ValueError: Out of range in x
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:1622: RuntimeWarning: divide by zero encountered in divide
+  ivar = 1./(1/b.ivar + (self.sys_err*sciu)**2)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:1622: RuntimeWarning: divide by zero encountered in divide
+  ivar = 1./(1/b.ivar + (self.sys_err*sciu)**2)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py:682: RuntimeWarning: invalid value encountered in divide
+  self.optimal_profile = m/m.sum(axis=0)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:2249: RuntimeWarning: invalid value encountered in sqrt
+  covard = np.sqrt(covar.diagonal())
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/utils.py:3600: RuntimeWarning: invalid value encountered in divide
+  ew_i = np.trapz((line/continuum)[:, mask],
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py:732: RuntimeWarning: invalid value encountered in divide
+  opt_flux = num.sum(axis=0)/den.sum(axis=0)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py:733: RuntimeWarning: divide by zero encountered in divide
+  opt_var = 1./den.sum(axis=0)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:4027: RuntimeWarning: invalid value encountered in multiply
+  ymin = np.minimum(ymin, np.percentile((flm-er*0.)[clip],
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:4132: RuntimeWarning: divide by zero encountered in divide
+  unit_corr = 1./sp_flat[g]['flux']/1.e-19  # /pscale
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:4134: RuntimeWarning: invalid value encountered in multiply
+  flux = (sp_data[g]['flux']*unit_corr/pscale)[clip]
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:4135: RuntimeWarning: invalid value encountered in multiply
+  err = (sp_data[g]['err']*unit_corr/pscale)[clip]
+
+WARNING:astroquery:VerifyWarning: Card is too long, comment will be truncated.
+WARNING:astroquery:VerifyWarning: Verification reported errors:
+WARNING:astroquery:VerifyWarning: HDU 6:
+WARNING:astroquery:VerifyWarning:     'NAXIS1' card at the wrong place (card 13).  Fixed by moving it to the right place (card 3).
+WARNING:astroquery:VerifyWarning:     'NAXIS2' card at the wrong place (card 14).  Fixed by moving it to the right place (card 4).
+WARNING:astroquery:VerifyWarning: HDU 7:
+WARNING:astroquery:VerifyWarning: HDU 8:
+WARNING:astroquery:VerifyWarning: HDU 9:
+WARNING:astroquery:VerifyWarning: HDU 10:
+WARNING:astroquery:VerifyWarning: HDU 11:
+WARNING:astroquery:VerifyWarning: Note: astropy.io.fits uses zero-based indexing.
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:1352: RuntimeWarning: invalid value encountered in divide
+  info['sn_{0}'.format(line)] = info['flux_'+line]/info['err_'+line]
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4582: RuntimeWarning: divide by zero encountered in divide
+  outwht = 1/outvar
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4582: RuntimeWarning: divide by zero encountered in divide
+  outwht = 1/outvar
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:1622: RuntimeWarning: divide by zero encountered in divide
+  ivar = 1./(1/b.ivar + (self.sys_err*sciu)**2)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:1622: RuntimeWarning: divide by zero encountered in divide
+  ivar = 1./(1/b.ivar + (self.sys_err*sciu)**2)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py:682: RuntimeWarning: invalid value encountered in divide
+  self.optimal_profile = m/m.sum(axis=0)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/utils.py:3600: RuntimeWarning: invalid value encountered in divide
+  ew_i = np.trapz((line/continuum)[:, mask],
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py:732: RuntimeWarning: invalid value encountered in divide
+  opt_flux = num.sum(axis=0)/den.sum(axis=0)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py:733: RuntimeWarning: divide by zero encountered in divide
+  opt_var = 1./den.sum(axis=0)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:4027: RuntimeWarning: invalid value encountered in multiply
+  ymin = np.minimum(ymin, np.percentile((flm-er*0.)[clip],
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:4132: RuntimeWarning: divide by zero encountered in divide
+  unit_corr = 1./sp_flat[g]['flux']/1.e-19  # /pscale
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:4134: RuntimeWarning: invalid value encountered in multiply
+  flux = (sp_data[g]['flux']*unit_corr/pscale)[clip]
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:4135: RuntimeWarning: invalid value encountered in multiply
+  err = (sp_data[g]['err']*unit_corr/pscale)[clip]
+
+WARNING:astroquery:VerifyWarning: Card is too long, comment will be truncated.
+WARNING:astroquery:VerifyWarning: Verification reported errors:
+WARNING:astroquery:VerifyWarning: HDU 6:
+WARNING:astroquery:VerifyWarning:     'NAXIS1' card at the wrong place (card 13).  Fixed by moving it to the right place (card 3).
+WARNING:astroquery:VerifyWarning:     'NAXIS2' card at the wrong place (card 14).  Fixed by moving it to the right place (card 4).
+WARNING:astroquery:VerifyWarning: HDU 7:
+WARNING:astroquery:VerifyWarning: HDU 8:
+WARNING:astroquery:VerifyWarning: HDU 9:
+WARNING:astroquery:VerifyWarning: HDU 10:
+WARNING:astroquery:VerifyWarning: HDU 11:
+WARNING:astroquery:VerifyWarning: HDU 12:
+WARNING:astroquery:VerifyWarning: HDU 13:
+WARNING:astroquery:VerifyWarning: HDU 14:
+WARNING:astroquery:VerifyWarning: HDU 15:
+WARNING:astroquery:VerifyWarning: HDU 16:
+WARNING:astroquery:VerifyWarning: HDU 17:
+WARNING:astroquery:VerifyWarning: HDU 18:
+WARNING:astroquery:VerifyWarning: HDU 19:
+WARNING:astroquery:VerifyWarning: Note: astropy.io.fits uses zero-based indexing.
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:1352: RuntimeWarning: invalid value encountered in divide
+  info['sn_{0}'.format(line)] = info['flux_'+line]/info['err_'+line]
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4582: RuntimeWarning: divide by zero encountered in divide
+  outwht = 1/outvar
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4582: RuntimeWarning: divide by zero encountered in divide
+  outwht = 1/outvar
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:1622: RuntimeWarning: divide by zero encountered in divide
+  ivar = 1./(1/b.ivar + (self.sys_err*sciu)**2)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:1622: RuntimeWarning: divide by zero encountered in divide
+  ivar = 1./(1/b.ivar + (self.sys_err*sciu)**2)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py:682: RuntimeWarning: invalid value encountered in divide
+  self.optimal_profile = m/m.sum(axis=0)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/utils.py:3600: RuntimeWarning: invalid value encountered in divide
+  ew_i = np.trapz((line/continuum)[:, mask],
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py:732: RuntimeWarning: invalid value encountered in divide
+  opt_flux = num.sum(axis=0)/den.sum(axis=0)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/model.py:733: RuntimeWarning: divide by zero encountered in divide
+  opt_var = 1./den.sum(axis=0)
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:4027: RuntimeWarning: invalid value encountered in multiply
+  ymin = np.minimum(ymin, np.percentile((flm-er*0.)[clip],
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:4132: RuntimeWarning: divide by zero encountered in divide
+  unit_corr = 1./sp_flat[g]['flux']/1.e-19  # /pscale
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:4134: RuntimeWarning: invalid value encountered in multiply
+  flux = (sp_data[g]['flux']*unit_corr/pscale)[clip]
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:4135: RuntimeWarning: invalid value encountered in multiply
+  err = (sp_data[g]['err']*unit_corr/pscale)[clip]
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:3280: RuntimeWarning: invalid value encountered in multiply
+  extra_msk = lcontam > mask_sn_limit*lmodel
+
+WARNING:astroquery:VerifyWarning: Card is too long, comment will be truncated.
+WARNING:astroquery:VerifyWarning: Verification reported errors:
+WARNING:astroquery:VerifyWarning: HDU 6:
+WARNING:astroquery:VerifyWarning:     'NAXIS1' card at the wrong place (card 13).  Fixed by moving it to the right place (card 3).
+WARNING:astroquery:VerifyWarning:     'NAXIS2' card at the wrong place (card 14).  Fixed by moving it to the right place (card 4).
+WARNING:astroquery:VerifyWarning: HDU 7:
+WARNING:astroquery:VerifyWarning: HDU 8:
+WARNING:astroquery:VerifyWarning: HDU 9:
+WARNING:astroquery:VerifyWarning: HDU 10:
+WARNING:astroquery:VerifyWarning: HDU 11:
+WARNING:astroquery:VerifyWarning: HDU 12:
+WARNING:astroquery:VerifyWarning: HDU 13:
+WARNING:astroquery:VerifyWarning: HDU 14:
+WARNING:astroquery:VerifyWarning: HDU 15:
+WARNING:astroquery:VerifyWarning: HDU 16:
+WARNING:astroquery:VerifyWarning: HDU 17:
+WARNING:astroquery:VerifyWarning: HDU 18:
+WARNING:astroquery:VerifyWarning: HDU 19:
+WARNING:astroquery:VerifyWarning: HDU 20:
+WARNING:astroquery:VerifyWarning: HDU 21:
+WARNING:astroquery:VerifyWarning: HDU 22:
+WARNING:astroquery:VerifyWarning: HDU 23:
+WARNING:astroquery:VerifyWarning: HDU 24:
+WARNING:astroquery:VerifyWarning: HDU 25:
+WARNING:astroquery:VerifyWarning: HDU 26:
+WARNING:astroquery:VerifyWarning: HDU 27:
+WARNING:astroquery:VerifyWarning: HDU 28:
+WARNING:astroquery:VerifyWarning: HDU 29:
+WARNING:astroquery:VerifyWarning: HDU 30:
+WARNING:astroquery:VerifyWarning: HDU 31:
+WARNING:astroquery:VerifyWarning: HDU 32:
+WARNING:astroquery:VerifyWarning: HDU 33:
+WARNING:astroquery:VerifyWarning: HDU 34:
+WARNING:astroquery:VerifyWarning: HDU 35:
+WARNING:astroquery:VerifyWarning: Note: astropy.io.fits uses zero-based indexing.
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/fitting.py:1352: RuntimeWarning: invalid value encountered in divide
+  info['sn_{0}'.format(line)] = info['flux_'+line]/info['err_'+line]
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4582: RuntimeWarning: divide by zero encountered in divide
+  outwht = 1/outvar
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: divide by zero encountered in divide
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4581: RuntimeWarning: invalid value encountered in multiply
+  outvar *= area_ratio/outwv*flux_density_scale**2
+
+WARNING:py.warnings:/Users/gwalth/python/src/grizli_v1.6.0.dev42/grizli/multifit.py:4582: RuntimeWarning: divide by zero encountered in divide
+  outwht = 1/outvar
+
