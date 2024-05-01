@@ -28,18 +28,19 @@
 #################################################################################
 # usage:
 #
-# python Grizli_Euclid_1_create_ref_images.py
-# python Grizli_Euclid_2_run_SExtractor.py ../sims/Euclid/TestPoints/config.yaml
-# python Grizli_Euclid_3_prep.py ../sims/Euclid/TestPoints/config.yaml
-# python Grizli_Euclid_4_model.py ../sims/Euclid/TestPoints/config.yaml
-# python Grizli_Euclid_5_fit_redshifts.py DET11 ../sims/Euclid/TestPoints/config.yaml
+#  export EUCLID_LIB=/Users/gwalth/Euclid/grizli/Roman_Euclid_lib
 #
+#  export EUCLID_SIM=/Users/gwalth/Euclid/grizli/sims/FSpatch_mod3_16183
 #
+# cd $EUCLID_SIM
 #
-#
-# python Grizli_Euclid_2_run_SEP.py ../sims/Euclid/TestPoints/config.yaml
-#
-#
+# python $EUCLID_LIB/Grizli_Euclid_0_build_yaml.py --home_path /Users/gwalth/Euclid/grizli/sims
+#          --dir_root FSpatch_mod3_16183 --slitless slitless_input --catalog catalog_input
+# python $EUCLID_LIB/Grizli_Euclid_1_create_ref_images.py config.yaml
+# python $EUCLID_LIB/Grizli_Euclid_2_run_SE.py config.yaml
+# python $EUCLID_LIB/Grizli_Euclid_3_prep_SE.py config.yaml
+# python $EUCLID_LIB/Grizli_Euclid_4_model_SE.py config.yaml
+# python $EUCLID_LIB/Grizli_Euclid_5_fit_redshifts.py DET11 config.yaml
 #
 #################################################################################
 
@@ -47,7 +48,7 @@ import time
 T_START = time.time()
 
 import grizli_functions
-#from grizli_functions import wcs_pixel_scale, check_sims, create_circular_mask
+#from grizli_functions import create_circular_mask
 from grizli_functions import (
         add_noise, 
         wcs_pixel_scale, 
@@ -99,7 +100,7 @@ from astropy.table import Table, unique, join, vstack
 #import drizzlepac
 #import photutils
 
-#import grizli
+import grizli
 #import grizli.model
 #import grizli.multifit
 #from grizli import utils, multifit, fitting
@@ -108,7 +109,7 @@ from astropy.table import Table, unique, join, vstack
 #from grizli import prep
 
 print('\n Python version: ', sys.version)
-#print('\n Grizli version: ', grizli.__version__)
+print('\n Grizli version: ', grizli.__version__)
 print('\n Astropy version: ', astropy.__version__)
 
 
@@ -118,6 +119,8 @@ print('\n Astropy version: ', astropy.__version__)
 plot = 1
 mag_zero = [25.6, 25.04, 25.26, 25.21, 26.0]
 yaml_file = f"config.yaml"
+rot = 2 # 2nd rotation option
+fr_str = "FRAME"
 
 
 ####################################
@@ -154,8 +157,6 @@ k = 1.3806503E-16   # cm^2*g/(s^2*K)
 
 # # Python Helper Functions
 # [top](#Table-of-Contents)
-
-# In[ ]:
 
 
 emlines = [["OVI",         1038.0],         # 0
@@ -196,11 +197,11 @@ emlines = [["OVI",         1038.0],         # 0
 
 #os.chdir('../')
 #os.chdir('/Users/gwalth/data/Roman/grizli/sims/')
-os.chdir('/Users/gwalth/data/Roman/grizli/sims/Euclid')
+#os.chdir('/Users/gwalth/data/Roman/grizli/sims/Euclid')
 
 #os.chdir('/local/RomanSims/grizli/sims/') # cygnusd
-HOME_PATH = os.getcwd()
-print('HOME_PATH = ', HOME_PATH)
+#HOME_PATH = os.getcwd()
+#print('HOME_PATH = ', HOME_PATH)
 #root = "SIM_10_18_22"
 #root = "SIM_12_23_22"
 #root = "TestPoints"
@@ -211,8 +212,26 @@ print('HOME_PATH = ', HOME_PATH)
 #root = "Env9"
 #root = "Env9_V1_RN"
 #root = "Env9_V1_TEST"
-root = "FSpatch_mod3_16183_TAcalib_V1_RNDC_2024-03-11"
+#root = "FSpatch_mod3_16183_TAcalib_V1_RNDC_2024-03-11_v1"
+#root = "FSpatch_mod3_16183_TAcalib_V1_RNDC_2024-03-11_v2"
 
+
+
+
+yaml_file = sys.argv[1]
+
+with open(yaml_file, 'r') as f:
+    yaml_dict = yaml.safe_load(f)
+    print(yaml_dict)
+
+HOME_PATH = yaml_dict["HOME_PATH"]
+print("HOME_PATH =", HOME_PATH)
+root = yaml_dict["root"]
+print("root =", root)
+
+slitless_files = yaml_dict["slitless_files"]
+catalog_files = yaml_dict["catalog_files"]
+zodi_files = yaml_dict["zodi_files"]
 
 
 YAML_PATH = os.path.join(HOME_PATH, root)
@@ -220,10 +239,14 @@ YAML_PATH = os.path.join(HOME_PATH, root)
 os.chdir(os.path.join(HOME_PATH, root, 'Prep'))
 
 
+# find all of the frames in the slitless files, hopefully they are all the same
+frames = []
+for sf in slitless_files:
+    L = sf.split("_")
+    frames.append([L[i] for i,l in enumerate(L) if fr_str in l][0])
 
-#slitless_files = glob.glob('EUC_SIM_*.fits')
-#slitless_files.sort()
-#print(len(slitless_files))
+print(frames)
+
 
 # First test
 #slitless_files = ['NISPS_TIPS_TestPoints_highSNR_mod1_14324_2023_05_26_frame1.fits']
@@ -234,7 +257,6 @@ os.chdir(os.path.join(HOME_PATH, root, 'Prep'))
 #slitless_files = ['NISPS_TIPS_TUTESTGAL_noSTARS_RN_frame1.fits']
 #zodi_files = []
 #catalog_files = ['TUGALCAT_TEST.fits']
-
 
 # Env9
 #slitless_files = ['NISPS_TIPS_Env9_mod3_14826_Hcut23_REFMAGeq1_noSTARS_RN_frame1.fits']
@@ -257,30 +279,24 @@ os.chdir(os.path.join(HOME_PATH, root, 'Prep'))
 #catalog_files = ['Env9_mod3_15329_base_Felgt2em16_Visit1_TESTarrayNEW.fits']
 
 # FSpatch_mod3
-slitless_files = [
-     'NISP_SLITLESS_FRAME1_FSpatch_mod3_16183_TAcalib_V1_RNDC_2024-03-11.fits',
-     #'NISP_SLITLESS_FRAME2_FSpatch_mod3_16183_TAcalib_V1_RNDC_2024-03-11.fits',
-     #'NISP_SLITLESS_FRAME3_FSpatch_mod3_16183_TAcalib_V1_RNDC_2024-03-11.fits',
-     #'NISP_SLITLESS_FRAME4_FSpatch_mod3_16183_TAcalib_V1_RNDC_2024-03-11.fits',
-]
+#slitless_files = [
+#     'NISP_SLITLESS_FRAME1_FSpatch_mod3_16183_TAcalib_V1_RNDC_2024-03-11.fits',
+#     #'NISP_SLITLESS_FRAME2_FSpatch_mod3_16183_TAcalib_V1_RNDC_2024-03-11.fits',
+#     #'NISP_SLITLESS_FRAME3_FSpatch_mod3_16183_TAcalib_V1_RNDC_2024-03-11.fits',
+#     #'NISP_SLITLESS_FRAME4_FSpatch_mod3_16183_TAcalib_V1_RNDC_2024-03-11.fits',
+#]
 #slitless_files = [
 #     'NISP_SLITLESS_FRAME1_FSpatch_mod3_16183_TAcalib_V1_RNDC_2024-03-11.fits',
 #     'NISP_SLITLESS_FRAME2_FSpatch_mod3_16183_TAcalib_V1_RNDC_2024-03-11.fits',
 #     'NISP_SLITLESS_FRAME3_FSpatch_mod3_16183_TAcalib_V1_RNDC_2024-03-11.fits',
 #     'NISP_SLITLESS_FRAME4_FSpatch_mod3_16183_TAcalib_V1_RNDC_2024-03-11.fits',
 #]
-zodi_files = []
-catalog_files = ['FSpatch_mod3_16183_TESTarrayCALIB_V1.fits']
+#zodi_files = []
+#catalog_files = ['FSpatch_mod3_16183_TESTarrayCALIB_V1.fits']
 
 
 print(slitless_files)
 print(catalog_files)
-
-
-#slitless_files = glob.glob("EUC_SIM_NISR*.fits")
-#catalog_files = glob.glob("CATALOG*.fits")
-#print(slitless_files)
-#print(catalog_files)
 
 
 # ## Directory Structure
@@ -289,15 +305,7 @@ print(catalog_files)
 # 
 # This is just showing that we have the right directories and we can find all of the files.
 
-# Clean
-os.chdir(os.path.join(HOME_PATH, root, 'Prep'))
-
-os.system('rm *_direct.fits')
-os.system('rm *_slitless.fits')
-os.system('rm *_wcs.fits')
-os.system('rm *_final*.fits')
-os.system('rm *_final.cat')
-os.system('rm Euclid_GrismFLT.pickle')
+#os.chdir(os.path.join(HOME_PATH, root, 'Prep'))
 
 
 # detector header names
@@ -309,8 +317,8 @@ all_det = euclid_det()
 # At some point we'll want to read the data extensions directly into Grizli, 
 # this is currently a kludge.
 #all_slitless = ["Euclid_FRAME%i" % (i+1) + "_DET%s_slitless.fits" for i,sf in enumerate(slitless_files)]
-all_slitless = [write_individual_slitless(sf, file_str = "Euclid_FRAME%i" % (i+1) + "_DET%s_slitless.fits", rot=1) for i,sf in enumerate(slitless_files)]
-all_zodi = [write_individual_slitless(sf, file_str ="Zodi_DET%s_slitless.fits") for sf in zodi_files]
+all_slitless = [write_individual_slitless(sf, file_str = "Euclid_%s" % (frames[i]) + "_DET%s_slitless.fits", rot=rot) for i,sf in enumerate(slitless_files)]
+all_zodi = [write_individual_slitless(sf, file_str ="Zodi_%s" % (frames[i]) + "_DET%s_slitless.fits", rot=rot) for i,sf in enumerate(zodi_files)]
 
 os.chdir(os.path.join(HOME_PATH, root, 'Prep'))
 
@@ -366,6 +374,7 @@ print(primer[filt])
 
 index = np.arange(len(primer))
 print(index[filt])
+
 # for TestPoints
 #primer.remove_row(index[filt][0])
 
@@ -773,21 +782,18 @@ if plot:
     
         plt.show()
 
-yaml_dict = {
-    'HOME_PATH': HOME_PATH,
-    'root': root,
-    'ref_files': ref_files,
-    'mag_zero': mag_zero,
-    'slitless_files': slitless_files,
-    'zodi_files': zodi_files,
-    'catalog_files': catalog_files,
-    'all_slitless': all_slitless,
-    'all_zodi': all_zodi,
-    'spec_exptime': spec_exptime,
-    'spec_gain': spec_gain,
-    'nexp': nexp,         
-}
+yaml_dict['ref_files'] = ref_files
+yaml_dict['mag_zero'] = mag_zero
+yaml_dict['all_slitless'] = all_slitless
+yaml_dict['all_zodi'] = all_zodi
+yaml_dict['spec_exptime'] = spec_exptime
+yaml_dict['spec_gain'] = spec_gain
+yaml_dict['nexp'] = nexp
 
 os.chdir(YAML_PATH)
-with open(yaml_file, 'w',) as f:
+with open(os.path.basename(yaml_file), 'w',) as f:
     yaml.dump(yaml_dict, f, sort_keys=False)
+
+
+
+

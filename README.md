@@ -1,4 +1,7 @@
-# Euclid_notebooks
+# Roman/Euclid Library
+
+The Roman/Euclid library contains python packages wrapped around grizli to help reduce and analyze
+Roman/Euclid simulations and eventually data.  
 
 
 ## Instructions for installing with Conda
@@ -97,7 +100,46 @@ cp ~/Downloads/CATALOG_WP9_INTERMEDIATE_RUN_v2_NewCoord_mod.fits .
 
 
 
+cd /Users/gwalth/data/Roman/grizli
 ```
-git clone https://github.com/gwalth/Euclid_notebooks.git
+git clone https://github.com/gwalth/Roman_Euclid_lib.git
 ```
+
+```
+source ~/conda_setup.sh
+source ~/sandbox.sh
+conda activate grizli39
+cd /Users/gwalth/data/Roman/grizli
+source grizli_env.sh
+cd Roman_Euclid_lib
+```
+
+
+# modify Grizli_Euclid_1_create_ref_images.py to files and catalogs
+```
+
+export EUCLID_SIM=/Users/gwalth/data/Roman/grizli/sims/Euclid/FSpatch_mod3_16183_TAcalib_V1_RNDC_2024-03-11_v1
+export EUCLID_SIM=/Users/gwalth/data/Roman/grizli/sims/Euclid/FSpatch_mod3_16183_TAcalib_V1_RNDC_2024-03-11_v2
+
+
+cd $EUCLID_SIM
+python $BASE/Roman_Euclid_lib/Grizli_Euclid_0_build_yaml.py --home_path /Users/gwalth/data/Roman/grizli/sims/Euclid --dir_root FSpatch_mod3_16183_TAcalib_V1_RNDC_2024-03-11_v1 --slitless slitless_input --catalog catalog_input
+python $BASE/Roman_Euclid_lib/Grizli_Euclid_0_build_yaml.py --home_path /Users/gwalth/data/Roman/grizli/sims/Euclid --dir_root FSpatch_mod3_16183_TAcalib_V1_RNDC_2024-03-11_v2 --slitless slitless_input --catalog catalog_input
+
+python $BASE/Roman_Euclid_lib/Grizli_Euclid_1_create_ref_images.py config.yaml
+python $BASE/Roman_Euclid_lib/Grizli_Euclid_2_run_SE.py config.yaml
+python $BASE/Roman_Euclid_lib/Grizli_Euclid_3_prep_SE.py config.yaml
+python $BASE/Roman_Euclid_lib/Grizli_Euclid_4_model_SE.py config.yaml
+
+cd $BASE/Roman_Euclid_lib/
+sh test_fit_redshifts.sh
+
+cd $EUCLID_SIM/Extractions
+ls *stack.fits | wc   # should be 16
+ls *beams.fits | wc   # should be 16
+python $BASE/Roman_Euclid_lib/tests/test_inspect2d.py "*stack.fits"
+python $BASE/Roman_Euclid_lib/tests/test_inspect2d.py "*beams.fits"
+```
+
+
 

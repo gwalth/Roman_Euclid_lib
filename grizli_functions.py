@@ -631,6 +631,9 @@ def write_individual_slitless(slitless_file, file_str = "Euclid_DET%s_slitless.f
     # for now dq is ones
     dq = np.ones((2048,2048)) 
 
+
+    grating = hdu_old[0].header['GWA_POS']
+
     all_slitless = []
 
     for i in range(0,4): 
@@ -688,15 +691,55 @@ def write_individual_slitless(slitless_file, file_str = "Euclid_DET%s_slitless.f
 
                 wcs_obj = wcs.WCS(head_wcs)
 
-                new_wcs = rotate(wcs_obj, 90)
-                k = 1
-                #if num in ['11','12','13','14','21','22','23','24']:
-                #    new_wcs = rotate(wcs_obj, 90)
-                #    k = 1
 
-                #elif num in ['31','32','33','34','41','42','43','44']:
-                #    new_wcs = rotate(wcs_obj, -90)
-                #    k = -1
+                # >>> import numpy as np
+                # >>> m = np.array([[1,2],[3,4]], int)
+                # >>> print(m)
+                # [[1 2]
+                #  [3 4]]
+                # >>> np.rot90(m,k=1)
+                # array([[2, 4],
+                #        [1, 3]])
+                # >>> np.rot90(m,k=-1)
+                # array([[3, 1],
+                #        [4, 2]])
+
+
+                # Frame1
+                # RGS000
+                # k = -1
+
+                # Frame2
+                # RGS180 +4
+                # k = 1
+
+                # Frame3
+                # RGS180 
+                # k = 1
+
+                # Frame4
+                # RGS000 -4
+                # k = -1
+
+                if grating == "RGS000": m = 1
+                elif grating == "RGS180": m = -1
+
+                print("rotate mode = ", rot)
+                if rot == 1:
+                    new_wcs = rotate(wcs_obj, 90 * m)
+                    k = 1 * m
+
+                elif rot == 2:
+                    if num in ['11','12','13','14','21','22','23','24']:
+                        new_wcs = rotate(wcs_obj, 90 * m)
+                        k = 1 * m
+                    
+                    elif num in ['31','32','33','34','41','42','43','44']:
+                        new_wcs = rotate(wcs_obj, -90 * m)
+                        k = -1 * m
+
+
+                
 
                 # rotate
                 print("rotating 90 degress")
