@@ -323,8 +323,9 @@ all_zodi = [write_individual_slitless(sf, file_str ="Zodi_%s" % (frames[i]) + "_
 os.chdir(os.path.join(HOME_PATH, root, 'Prep'))
 
 if plot:
-    file = "Euclid_FRAME1_DET11_slitless.fits"
-    pf = pyfits.open(file)
+
+    sf = all_slitless[0][0]
+    pf = pyfits.open(sf)
 
     data = pf['SCI'].data - 1024.
     X = data.flatten()
