@@ -1,4 +1,5 @@
-#
+#!/usr/bin/env python
+
 import grizli_functions
 
 from grizli_functions import (

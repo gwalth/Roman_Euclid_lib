@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import sys
 import os
 import yaml
@@ -236,57 +238,54 @@ roll_ang = 0.0
 ###############
 ### SPECTRA ###
 ###############
-for i,slitless_file in enumerate(all_slitless[0]):
-    print(slitless_file)
+for j,single_frame in enumerate(all_slitless):
+    for i,slitless_file in enumerate(single_frame):
+        print(slitless_file)
     
-    new_slitless_file = slitless_file.replace(".fits",suffix+".fits")
-    all_final_slitless.append(new_slitless_file)
+        new_slitless_file = slitless_file.replace(".fits",suffix+".fits")
+        all_final_slitless.append(new_slitless_file)
+            
+        hdu = pyfits.open(slitless_file)
+        hdu.info()
+ 
+        if all_zodi:
+            zodi_file = all_zodi[i]
+            print(zodi_file)
+            hdu_zodi = pyfits.open(zodi_file)
+            zodi = hdu_zodi[ext].data
+        else:
+            zodi = 0.0
+ 
+ 
+        det_id = hdu[0].header['DET_ID']
         
-    hdu = pyfits.open(slitless_file)
-    hdu.info()
-
-    if all_zodi:
-        zodi_file = all_zodi[i]
-        print(zodi_file)
-        hdu_zodi = pyfits.open(zodi_file)
-        zodi = hdu_zodi[ext].data
-    else:
-        zodi = 0.0
-
-#for i,sf in enumerate(all_slitless[0]):    
-
-    
-#    hdu = pyfits.open(sf)
-
-    det_id = hdu[0].header['DET_ID']
-    
-    exptime = slitless_dict['EXPTIME']
-    
-    #roll_ang = float(sf.split("_")[4])
-    slitless_dict['PA_V3'] = roll_ang
-    dtime = exptime/(60.*60.*24.)
-    slitless_dict['EXPSTART'] += dtime*i
-
-    hdu1 = add_grizli_headers(hdu, slitless_dict)
-
-    ext = 1
-    sci = hdu1[ext].data
-    #hdu[ext].data = sci/spec_exptime/gain
-    #hdu1[ext].data = (sci-1024.)/spec_exptime/spec_gain
-    hdu1[ext].data = (1.0*sci - 1.0*zodi)/spec_exptime/spec_gain
-    
-    
-    ext = 2
-    chi2 = hdu1[ext].data
-    hdu1[ext].data = np.sqrt(chi2)/spec_exptime/spec_gain
-    
-    #hdu1.writeto(new_slitless, overwrite=True, output_verify='fix')
-    #print("Writing",new_slitless)
-    
-    #nsf = "-".join([prefix,"%03d.0" % float(roll_ang),grism]) + "_flt.fits"
-    new_slitless = "-".join([prefix,"det",det_id,"%03d.0" % float(roll_ang),grism]) + "_flt.fits"
-    hdu1.writeto(new_slitless, overwrite=True, output_verify='fix')
-    print("Writing",new_slitless)
+        exptime = slitless_dict['EXPTIME']
+        
+        #roll_ang = float(sf.split("_")[4])
+        slitless_dict['PA_V3'] = roll_ang
+        dtime = exptime/(60.*60.*24.)
+        slitless_dict['EXPSTART'] += dtime*i
+ 
+        hdu1 = add_grizli_headers(hdu, slitless_dict)
+ 
+        ext = 1
+        sci = hdu1[ext].data
+        #hdu[ext].data = sci/spec_exptime/gain
+        #hdu1[ext].data = (sci-1024.)/spec_exptime/spec_gain
+        hdu1[ext].data = (1.0*sci - 1.0*zodi)/spec_exptime/spec_gain
+        
+        
+        ext = 2
+        chi2 = hdu1[ext].data
+        hdu1[ext].data = np.sqrt(chi2)/spec_exptime/spec_gain
+        
+        #hdu1.writeto(new_slitless, overwrite=True, output_verify='fix')
+        #print("Writing",new_slitless)
+        
+        #nsf = "-".join([prefix,"%03d.0" % float(roll_ang),grism]) + "_flt.fits"
+        new_slitless = "-".join([prefix,"det",det_id,"%03d.0" % float(roll_ang),grism]) + "_flt.fits"
+        hdu1.writeto(new_slitless, overwrite=True, output_verify='fix')
+        print("Writing",new_slitless)
 
 
 #sys.exit()

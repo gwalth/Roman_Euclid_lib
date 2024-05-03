@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import sys
 import os
 import yaml
@@ -50,22 +52,6 @@ T_START = time.time()
 ####################################
 # paramters
 ####################################
-id_key = "NUMBER"
-mag_key = "MAG_AUTO"
-flux_key = "FLUX_AUTO"
-x_image_key = "X_IMAGE"
-y_image_key = "Y_IMAGE"
-x_world_key = "X_WORLD"
-y_world_key = "Y_WORLD"
-#id_key = "id"
-#mag_key = "mag_auto"
-#flux_key =  'nisp_h_tot_corr'
-#x_image_key = "x_image"
-#y_image_key = "y_image"
-#x_world_key = "x_world"
-#y_world_key = "y_world"
-
-
 verb = 1
 plot = 1
 #yaml_file = "config.yaml"
@@ -89,13 +75,11 @@ YAML_PATH = os.path.join(HOME_PATH, root)
 
 #dir()
 all_slitless = yaml_dict["all_slitless"]
-all_zodi = yaml_dict["all_zodi"]
 spec_exptime = yaml_dict["spec_exptime"]
 spec_gain = yaml_dict["spec_gain"]
 all_cat = yaml_dict["all_cat"]
 all_ref_files = yaml_dict["all_ref_files"]
 catalog_files = yaml_dict["catalog_files"]
-phot_mode = yaml_dict["phot_mode"] 
 
 
 Euclid_bands = ['VIS','NIR_Y','NIR_J','NIR_H']
@@ -124,40 +108,14 @@ all_final_slitless = []
 ###############
 ### SPECTRA ###
 ###############
-#for slitless in all_slitless[0]:
-for i,slitless_file in enumerate(all_slitless[0]):
-    print(slitless_file)
+for slitless in all_slitless[0]:
+    print(slitless)
     
-    new_slitless_file = slitless_file.replace(".fits",suffix+".fits")
-    all_final_slitless.append(new_slitless_file)
+    new_slitless = slitless.replace(".fits",suffix+".fits")
+    all_final_slitless.append(new_slitless)
         
-    hdu = pyfits.open(slitless_file)
+    hdu = pyfits.open(slitless)
     hdu.info()
-
-    #print(hdu[0].header)
-    #print(hdu[1].header)
-
-    print(hdu[0].header["GWA_POS"])
-    print(hdu[0].header["GWA_ANG"])
-    print(hdu[0].header["GWA_REF"])
-    print(hdu[0].header["GWA_TILT"])
-    print(hdu[1].header["DET_ID"])
-
-
-    grism = hdu[0].header["GWA_POS"]
-    det_id = hdu[1].header["DET_ID"]
-
-    fake_filter = "-".join([grism,det_id])
-    print(fake_filter)
-
-    if all_zodi:
-        zodi_file = all_zodi[i]
-        print(zodi_file)
-        hdu_zodi = pyfits.open(zodi_file)
-        zodi = hdu_zodi[ext].data
-    else:
-        zodi = 0.0
-
 
     ext = 0
     #hdu[ext].header['INSTRUME'] = 'NISP' 
@@ -166,29 +124,26 @@ for i,slitless_file in enumerate(all_slitless[0]):
     # - optical model looks the same for each detector
     # - sensitivity for each detector (are they different?)
     hdu[ext].header['FILTER'] = 'RED'
-    #hdu[ext].header['FILTER'] = fake_filter
     hdu[ext].header['EXPTIME'] = spec_exptime
 
     ext = 1
     #hdu[ext].header['INSTRUME'] = 'NISP'
     hdu[ext].header['INSTRUME'] = 'NISP-GLWv1'
     hdu[ext].header['FILTER'] = 'RED'
-    #hdu[ext].header['FILTER'] = fake_filter
     hdu[ext].header['EXTVER'] = ext
     hdu[ext].header['EXPTIME'] = spec_exptime
 
     sci = hdu[ext].data
     #hdu[ext].data = sci/spec_exptime/gain
-    #hdu[ext].data = (sci-1024.)/spec_exptime/spec_gain
-    hdu[ext].data = (1.0*sci - 1.0*zodi)/spec_exptime/spec_gain
+    hdu[ext].data = (sci-1024.)/spec_exptime/spec_gain
 
 
     ext = 2
     chi2 = hdu[ext].data
     hdu[ext].data = np.sqrt(chi2)/spec_exptime/spec_gain
 
-    hdu.writeto(new_slitless_file, overwrite=True, output_verify='fix')
-    print("Writing",new_slitless_file)
+    hdu.writeto(new_slitless, overwrite=True, output_verify='fix')
+    print("Writing",new_slitless)
 
 
 # In[ ]:
@@ -223,17 +178,11 @@ for slitless in all_final_slitless:
 
 all_phot = []
 
-
 for cat in all_cat:
     #print(cat)
-    if phot_mode == "SExtractor": format="ascii.sextractor"
-    elif phot_mode == "SEP": format = "fits"
-
-    phot = Table.read(cat, format=format) # ref_cat in multimission
+    phot = Table.read(cat, format='ascii.sextractor') # ref_cat in multimission
     all_phot.append(phot)
     print(cat," number_of_sources =",len(phot))
-
-
 print()
 print(phot.colnames)
 
@@ -244,38 +193,31 @@ if plot:
     fig = plt.figure(figsize=(10,6))
     
     k = 0
-    #ax = []
-    #if phot_mode == "SExtractor":
-
-    if 1:
-
-
-        for i,phot in enumerate(all_phot):
-            
-            cat = all_cat[i]
+    ax = []
+    for i,phot in enumerate(all_phot):
         
-            #print(phot[mag_key])
-            #print(phot[flux_key])
+        cat = all_cat[i]
+    
+        #print(phot["MAG_AUTO"])
+        #print(phot["FLUX_AUTO"])
+    
+        if len(phot) > 0:    
+            print(np.min(phot["MAG_AUTO"]),np.max(phot["MAG_AUTO"]))
+            #print(np.min(phot["FLUX_AUTO"]),np.max(phot["FLUX_AUTO"]))
+    
         
-            if len(phot) > 0:    
-                print(np.min(phot[mag_key]),np.max(phot[mag_key]))
-                #print(np.min(phot[flux_key]),np.max(phot[flux_key]))
+        ax = fig.add_subplot(2,3,k+1)
+        ax.hist(phot["MAG_AUTO"],range=(10,32),bins=44)
+        #ax.hist(phot["MAG_AUTO"],bins=20)
+        #ax.hist(phot["FLUX_AUTO"],bins=20)
+    
+    
+        ax.set_title(cat, fontsize=12)
+        ax.set_xlabel("mag")
+        ax.set_ylabel("N")
+        ax.set_xlim(10,32)
         
-            
-            ax = fig.add_subplot(2,3,k+1)
-            ax.hist(phot[mag_key],range=(10,32),bins=44)
-            #ax.hist(phot[mag_key],bins=20)
-            #ax.hist(phot[flux_key],bins=20)
-        
-        
-            ax.set_title(cat, fontsize=12)
-            ax.set_xlabel("mag")
-            ax.set_ylabel("N")
-            ax.set_xlim(10,32)
-            
-            k += 1
-    #elif phot_mode == "SEP":
-
+        k += 1
         
     plt.show()
     
@@ -301,19 +243,19 @@ if plot:
         hdu = pyfits.open(direct)
         img = hdu[1].data
 
-        filt = phot[mag_key] < plot_mag_cut
+        filt = phot['MAG_AUTO'] < plot_mag_cut
 
         subphot = phot[filt]
         
         ax1 = fig.add_subplot(2,3,k+1)
         ax1.imshow(img,origin="lower", vmin=-0.1, vmax=0.1)
-        ax1.scatter(subphot[x_image_key], subphot[y_image_key], fc="None", ec="r", s=50, lw=0.5, alpha=1.0)
+        ax1.scatter(subphot["X_IMAGE"], subphot["Y_IMAGE"], fc="None", ec="r", s=50, lw=0.5, alpha=1.0)
     
         if plot_labels:
-            for j,src in enumerate(subphot[mag_key]):
-            #for j,src in enumerate(subphot[id_key]):
-            #for j,src in enumerate(subphot[flux_key]):
-                ax1.text(subphot[x_image_key][j], subphot[y_image_key][j], "%.2f" % (src), fontsize=8)
+            for j,src in enumerate(subphot['MAG_AUTO']):
+            #for j,src in enumerate(subphot['NUMBER']):
+            #for j,src in enumerate(subphot['FLUX_AUTO']):
+                ax1.text(subphot['X_IMAGE'][j], subphot['Y_IMAGE'][j], "%.2f" % (src), fontsize=8)
 
         ax1.set_title(direct, fontsize=12)
         
@@ -332,13 +274,13 @@ print(primer.colnames)
 print(len(primer))
 
 
-#filt = primer['RA'] < 200.
-#print(filt)
-#print(primer[filt])
+filt = primer['RA'] < 200.
+print(filt)
+print(primer[filt])
 
-#index = np.arange(len(primer))
-#print(index[filt])
-#primer.remove_row(index[filt][0])
+index = np.arange(len(primer))
+print(index[filt])
+primer.remove_row(index[filt][0])
 
 # add magnitudes band into catalog
 for bk,fk in zip(Euclid_bands,Euclid_bands_flux):
@@ -363,10 +305,8 @@ for i,phot in enumerate(all_phot):
     
     if len(phot) > 0:
         #c_prime = SkyCoord(ra=primer["RA"], dec=primer["DEC"])
-        #c_prime = SkyCoord(ra=primer["RA_MAG"], dec=primer["DEC_MAG"])
-        c_prime = SkyCoord(ra=primer["RA_MAG"]*u.deg, dec=primer["DEC_MAG"]*u.deg)
-        c_phot = SkyCoord(ra=phot[x_world_key], dec=phot[y_world_key])
-
+        c_prime = SkyCoord(ra=primer["RA_MAG"], dec=primer["DEC_MAG"])
+        c_phot = SkyCoord(ra=phot["X_WORLD"], dec=phot["Y_WORLD"])
 
         #idx, d2d, d3d = c_prime.match_to_catalog_sky(c_phot)
         idx, d2d, d3d = c_phot.match_to_catalog_sky(c_prime)
@@ -434,17 +374,17 @@ if plot:
     
         ax1 = fig.add_subplot(2,3,k+1)
         ax1.imshow(img,origin="lower",vmin=-0.1,vmax=0.1)
-        #ax1.scatter(phot[x_image_key],phot[y_image_key],fc="None",ec="r",s=60)
+        #ax1.scatter(phot["X_IMAGE"],phot["Y_IMAGE"],fc="None",ec="r",s=60)
 
         if len(match_clean_tbl) > 0:
 
-            filt = match_clean_tbl[mag_key] < plot_mag_cut
+            filt = match_clean_tbl['MAG_AUTO'] < plot_mag_cut
             
             sub_match_clean_tbl = match_clean_tbl[filt]
 
             ax1.scatter(
-                sub_match_clean_tbl[x_image_key], 
-                sub_match_clean_tbl[y_image_key], 
+                sub_match_clean_tbl['X_IMAGE'], 
+                sub_match_clean_tbl['Y_IMAGE'], 
                 lw=0.5,
                 fc="None",
                 ec="r",
@@ -454,8 +394,8 @@ if plot:
             if plot_labels:
                 for j,src in enumerate(sub_match_clean_tbl['SOURCE_ID']):
                     ax1.text(
-                        sub_match_clean_tbl[x_image_key][j],
-                        sub_match_clean_tbl[y_image_key][j], 
+                        sub_match_clean_tbl['X_IMAGE'][j],
+                        sub_match_clean_tbl['Y_IMAGE'][j], 
                         src,
                         fontsize=8
                     )
@@ -468,27 +408,21 @@ if plot:
 print("N =",len(all_phot_matched_clean))
 print()
 
-print(all_phot_matched_clean)
-
 verb = 0
 
 for i,match_clean_tbl in enumerate(all_phot_matched_clean[:-1]):  
-#for i,match_clean_tbl in enumerate(all_phot_matched_clean):  
     zps = []
     mags = []
-
-    print(len(match_clean_tbl))
     
     if len(match_clean_tbl) > 0:
         print("i =",i)
-        
-        
+                
         for k,row in enumerate(match_clean_tbl):
             
-            #ind = np.argmax(match_clean_tbl[flux_key])
+            #ind = np.argmax(match_clean_tbl['FLUX_AUTO'])
 
             #print("ind =",ind)
-            dn = row[flux_key]
+            dn = row['FLUX_AUTO']
             mag = row[Euclid_bands[i]]
             flux = row[Euclid_bands_flux[i]]
 
@@ -578,7 +512,7 @@ print(all_final_slitless)
 print(all_ref_files)
 #print(all_seg)
 #print(all_phot_matched_clean)
-print(all_phot_matched_clean[-1][id_key, x_image_key, y_image_key, mag_key])
+print(all_phot_matched_clean[-1]['NUMBER','X_IMAGE','Y_IMAGE','MAG_AUTO'])
 
 T_END = time.time()
 

@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+
+
 ### Euclid Parameters and Requirements
 # https://sci.esa.int/web/euclid/-/euclid-nisp-instrument
 # 

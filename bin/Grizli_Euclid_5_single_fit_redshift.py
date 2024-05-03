@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 
 # python Grizli_Euclid_5_single_fit_redshift.py DET11 214.6623540 57.8587647 ../sims/Euclid/TestPoints_v2/config.yaml
 
