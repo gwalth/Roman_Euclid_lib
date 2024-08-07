@@ -66,7 +66,8 @@ rows = int(np.ceil(N/cols))
 print(cols)
 print(rows)
 
-
+#sigma = 0.1
+sigma = 5.
 
 
 #fig, axs = plt.subplots(rows, cols, figsize=(16, 1.5), layout='constrained')
@@ -88,8 +89,8 @@ for ax,l in zip(axs.flat,L):
 
     std = stat_dict["std"]
     med = stat_dict["median"]
-    vmin = med - 0.1*std
-    vmax = med + 0.1*std
+    vmin = med - sigma*std
+    vmax = med + sigma*std
 
     ax.imshow(img, vmin=vmin, vmax=vmax)
     ax.text(0.025, 0.5, "DET" + det_id, transform=ax.transAxes)

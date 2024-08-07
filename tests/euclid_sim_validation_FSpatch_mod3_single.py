@@ -4,7 +4,8 @@ import math,glob,sys
 
 from astropy.table import Table
 import astropy.io.fits as pyfits
-import astropy.wcs as pywcs
+#import astropy.wcs as pywcs
+from astropy.wcs import WCS
 
 import numpy as np
 from scipy import integrate, interpolate
@@ -19,6 +20,8 @@ from matplotlib.colors import Normalize
 
 #import grizli_aXe_glw
 from grizli_aXe_glw import aXeConf_glw, EuclidData, EuclidFilters, zodi_subtract, insidePolygon, flam_to_fnu
+from grizli_functions import euclid_wcs, remove_basic_wcs
+
 
 import matplotlib as mpl    
 mpl.rcParams['font.size'] = 8
@@ -83,8 +86,8 @@ err_fn = lambda p, x, z: (gauss_fn(p, x) - z) / noise
 simdata_path = "/Users/gwalth/data/Roman/grizli/sims/Euclid/FSpatch_mod3_16183_TAcalib_V1_RNDC_2024-03-11/Prep/"
 raw_path = "/Users/gwalth/data/Roman/grizli/sims/Euclid/Raw/EuclidSIMS/FSpatch_mod3_16183_TAcalib_V1_RNDC_2024-03-11/frame1/"
 
-gain = 3500.0
-#gain = 1.0
+#gain = 3500.0
+gain = 1.0
 #aper = 8.
 aper = 12.
 #aper = 20.
@@ -115,23 +118,27 @@ cmap = cm.viridis
 
 #prefix = "/Users/gwalth/data/aXeSIM/Roman/aXeSIM_Roman/"
 
-conf_path = "/Users/gwalth/data/Roman/grizli/grizli/CONF/Euclid/GLWv3/RGS000_0/"     # Frame1   
+conf_path = "/Users/gwalth/data/Roman/grizli/grizli/CONF/Euclid/GLWv1/"
+
+#conf_path = "/Users/gwalth/data/Roman/grizli/grizli/CONF/Euclid/GLWv3/RGS000p0/"    # Frame1   
 #conf_path = "/Users/gwalth/data/Roman/grizli/grizli/CONF/Euclid/GLWv3/RGS180p4/"    # Frame2
-#conf_path = "/Users/gwalth/data/Roman/grizli/grizli/CONF/Euclid/GLWv3/RGS180_0/"    # Frame3
+#conf_path = "/Users/gwalth/data/Roman/grizli/grizli/CONF/Euclid/GLWv3/RGS180p0/"    # Frame3
 #conf_path = "/Users/gwalth/data/Roman/grizli/grizli/CONF/Euclid/GLWv3/RGS000m4/"    # Frame4
 
 
 #roman_path = prefix + "roman_setup/"
 simdata_path = "/Users/gwalth/data/Roman/grizli/sims/Euclid/FSpatch_mod3_16183_TAcalib_V1_RNDC_2024-03-11/Prep/"
 
-conf = "config_axesim_det_11.conf"
+#conf = "config_axesim_det_11.conf"
+#conf = "NISP_RGS180p4_12.conf"
+conf = "test_NISP_RGS180p4_12.conf"
 sens_file = 'SENS_A.fits'
 #input_spec_list = "input_spectra.lis"
 
 direct_file = simdata_path + "Euclid-NISP_H_ref.fits"
-slitless_file = simdata_path + "NISP_SLITLESS_FRAME1_FSpatch_mod3_16183_TAcalib_V1_RNDC_2024-03-11.fits"    # RGS000_0
-#slitless_file = simdata_path + "NISP_SLITLESS_FRAME2_FSpatch_mod3_16183_TAcalib_V1_RNDC_2024-03-11.fits"   # RGS180p4
-#slitless_file = simdata_path + "NISP_SLITLESS_FRAME3_FSpatch_mod3_16183_TAcalib_V1_RNDC_2024-03-11.fits"   # RGS180_0
+#slitless_file = simdata_path + "NISP_SLITLESS_FRAME1_FSpatch_mod3_16183_TAcalib_V1_RNDC_2024-03-11.fits"    # RGS000p0
+slitless_file = simdata_path + "NISP_SLITLESS_FRAME2_FSpatch_mod3_16183_TAcalib_V1_RNDC_2024-03-11.fits"   # RGS180p4
+#slitless_file = simdata_path + "NISP_SLITLESS_FRAME3_FSpatch_mod3_16183_TAcalib_V1_RNDC_2024-03-11.fits"   # RGS180p0
 #slitless_file = simdata_path + "NISP_SLITLESS_FRAME4_FSpatch_mod3_16183_TAcalib_V1_RNDC_2024-03-11.fits"   # RGS000m4
 
 
@@ -170,7 +177,8 @@ aXe = aXeConf_glw(conf_file=conf_path + conf)
 print(aXe.conf)
 #aXe.get_beam(xc, yc)
 #aXe.load_files(direct_file, slitless_file, offset=0)
-aXe.load_files(direct_file, slitless_file, offset=-1024.)
+aXe.load_files(direct_file, slitless_file, offset=-1024., fix_mosa=1)
+#aXe.load_files(direct_file, slitless_file, pre_process_path=conf_path, offset=-1024, fix_mosa=1, det='11', remove_dc=1, correct_gain=0, diag=1)
 
 aXe.load_sensitivity(conf_path+sens_file)
 
@@ -211,7 +219,10 @@ cat = Table.read(catalog_file, format='ascii.sextractor')
 # find a source in all of the Euclid detector footprints
 ########################################################
 # bright source near the center of DET11
-a0, d0 = 213.5310504, 57.4451151
+#a0, d0 = 213.5310504, 57.4451151
+
+
+a0,d0 = 213.5306062, 57.4122091
 
 dr = np.sqrt((cat['X_WORLD']-a0)**2*np.cos(d0/180*np.pi)**2 + 
              (cat['Y_WORLD']-d0)**2)*3600.
@@ -225,37 +236,43 @@ print('ID:%d, mag=%.2f, dr=%.2f"' % (id, obj_mag, np.min(dr)))
 # conversion between the reference image and slitless spectra
 #############################################################
 
-ext = 1
-slitless_files = glob.glob(simdata_path + "Euclid_FRAME1_DET11_slitless.fits")
+#ext = 1
+#slitless_files = glob.glob(simdata_path + "Euclid_FRAME1_DET11_slitless.fits")
 
-slitless_files.sort()
-print(slitless_files)
+#slitless_files.sort()
+#print(slitless_files)
 
-# find a single coordinate in all slitless DET images
-for sf in slitless_files:
+fix_mosa = 1
+det = '11'
 
-    ext = 1
-    print(sf)
-    pf = pyfits.open(sf, ignore_missing_end=1)
-    head = pf[ext].header
-    #img = pf[ext].data
-    pw = pywcs.WCS(fobj=pf, header=head)
-    A = pw.calc_footprint()
-    print(A)
-
-    p0 = [a0, d0]
-    print(p0)
-    inside = insidePolygon(A, p0)
-    print(inside)
-    
-    if inside:
-        #skycoords = pw.wcs_pix2world(pixcoords,1)
-        pixcoords = pw.wcs_world2pix([p0],1)
-        print(pixcoords)
-        xc, yc = pixcoords[0]
+hdu = pyfits.open(slitless_file)
+head_slit = hdu['DET%s.SCI' % (det)].header
+print(head_slit)
+naxis1 = head_slit["NAXIS1"]
+naxis2 = head_slit["NAXIS2"]
 
 
-# In[50]:
+if fix_mosa:
+    head_wcs = euclid_wcs( head_slit )
+else:
+    head_wcs = head_slit 
+print(head_wcs)
+
+wcs_slit = WCS(head_wcs)
+print(wcs_slit)
+
+A = wcs_slit.calc_footprint(axes=(naxis1,naxis2))
+print(A)
+
+p0 = [a0, d0]
+print(p0)
+inside = insidePolygon(A, p0)
+print(inside)
+
+if inside:
+    pixcoords = wcs_slit.wcs_world2pix([p0],1)
+    print(pixcoords)
+    xc, yc = pixcoords[0]
 
 
 #euc_dat.find_source(ra, dec)
@@ -274,7 +291,7 @@ aXe.get_beam_invert_cutout(xc, yc, aper, beam='A', offset=0.0, dy0=-300.0, dy1=3
 aXe.extract_cutout(disp_axis=1, spatial_axis=0)
 
 aXe.plot_cutout(vmin=-10., vmax=30., verb=1, flip_axes=1)
-#aXe.plot_trace()
+aXe.plot_trace(vmin=-10, vmax=30)
 #aXe.plot_trace(x0=1350, x1=2350, y0=2800, y1=3800)
 aXe.get_thumbnail(a0, d0)
 

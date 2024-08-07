@@ -15,6 +15,9 @@ import astropy.io.fits as pyfits
 from astropy import wcs
 from astropy.table import Table, unique, join
 
+from scipy import linalg
+from scipy.optimize import leastsq, least_squares
+
 import numpy as np
 
 from scipy import integrate
@@ -46,6 +49,278 @@ c = 2.9979E10       # cm/s
 h = 6.626068E-27    # cm^2*g/s           # erg s 
 k = 1.3806503E-16   # cm^2*g/(s^2*K)
 
+def fit_poly(
+    x_pix,
+    y_pix,
+    noise=1.0,
+    param=[0, 1],
+    verb=1,
+    iter=3,
+    sigma_clip = 5.,
+    #w0=9000.0,
+    #w1=20000.0,
+):
+
+
+    x_tmp = x_pix.copy()
+    y_tmp = y_pix.copy()
+
+
+    for i in range(iter):
+
+        print("Iteration =",i)
+
+        # fit pixel position as a function of wavelength (flip args if you want reverse)
+        print("Polynomial order = %i" % (len(param) - 1))
+        p, cov, infodict, mesg, ier = leastsq(
+            err_fn_poly, param, args=(x_tmp, y_tmp, noise), full_output=1
+        )
+      
+        if (len(infodict["fvec"]) > len(p)) and cov is not None:
+            # Residuals of the fit
+            # print(infodict['fvec'])
+            # Reduced Chi squared
+            chisq = (infodict["fvec"] ** 2).sum()
+            print("chisq = %.1f" % chisq)
+            # dof is degrees of freedom
+            dof = len(infodict["fvec"]) - len(p)
+            print("degrees of freedom = %.0f" % dof)
+            rchisq = chisq / dof
+            print("reduced chisq = %.1f" % rchisq)
+            cov = cov * rchisq
+        else:
+            cov = np.inf
+      
+        err = []
+        for i in range(len(p)):
+            try:
+                err.append(np.absolute(cov[i][i]) ** 0.5)
+            except:
+                err.append(0.00)
+      
+        print("Polynomial solution")
+        print(p)
+        print(err)
+
+      
+        rms = np.sqrt(np.sum(infodict["fvec"] ** 2))
+        print("RMS = %.4f" % (rms))
+
+        rms_glw = np.nanstd(infodict["fvec"])
+        #rms_glw = MAD(infodict["fvec"])
+
+        print(rms_glw)
+        print(sigma_clip*rms_glw)
+
+        filt = np.abs(infodict["fvec"]) < sigma_clip*rms_glw
+
+        x_tmp = x_tmp[filt]
+        y_tmp = y_tmp[filt]
+
+        print("Points clipped = ", len(y_pix) - len(y_tmp))
+      
+        #print(np.nanstd(infodict["fvec"]))
+        #print(MAD(infodict["fvec"]))
+        #print(5*np.nanstd(infodict["fvec"]))
+        #print(5*MAD(infodict["fvec"]))
+        #print(np.nanstd(y_pix))
+        #print(MAD(y_pix))
+        #print(5*np.nanstd(y_pix))
+        #print(5*MAD(y_pix))
+        print()
+
+    if verb:
+
+        #print(x_pix)
+        x0 = np.min(x_pix)
+        x1 = np.max(x_pix)
+        x_inc = (x1 - x0)/100.0
+        x_small = np.arange(x0, x1+x_inc, x_inc)
+        p1_func = poly_n(p, x_small)
+        #print(x_small)
+        #print(p1_func)
+
+        fig = plt.figure()
+
+        ax1 = fig.add_subplot(121)
+        ax1.scatter(x_pix,  y_pix, c="tab:red")
+        ax1.scatter(x_tmp,  y_tmp, c="tab:blue")
+        ax1.plot(x_small, p1_func, c="tab:green")
+        ax1.set_xlabel("X_pos (pixels)")
+        ax1.set_ylabel("Y_pos (pixels)")
+        # p1.set_title(name)
+        # p1.plot([line_wav[0],line_wav[-1]],[0,0],"--")
+        #p1.plot([w0, w1], [0, 0], "--")
+        #p1.set_xlim(w0, w1)
+
+        y0, y1 = ax1.get_ylim()
+        ax1.set_ylim(2 * y0, 2 * y1)
+
+        #ax1.set_title("Residuals to fit")
+
+
+        ax2 = fig.add_subplot(122)
+
+        ax2.scatter(x_tmp, infodict["fvec"])
+        ax2.set_xlabel("X_pos (pixels)")
+        ax2.set_ylabel("Residuals of fit [pixels]")
+
+        # p1.set_title(name)
+        # p1.plot([line_wav[0],line_wav[-1]],[0,0],"--")
+        #p1.plot([w0, w1], [0, 0], "--")
+        #p1.set_xlim(w0, w1)
+
+        y0, y1 = ax2.get_ylim()
+        ax2.set_ylim(2 * y0, 2 * y1)
+
+        ax2.set_title("Residuals to fit")
+
+        plt.show()
+
+    return p, err
+
+
+def fit_gauss(profile, verb=1, noise=1.):
+
+    yp_min = np.min(profile)
+    yp_max = np.max(profile)
+
+
+    x_data = np.arange(len(profile))
+    #x_cen = len(profile)/2.
+    x_cen = x_data[np.argmax(profile)]
+
+
+
+    #param = [sign * amp, line, sigma, np.min(line_data)] + poly_param
+    param = [
+            yp_max,
+            x_cen,
+            len(profile)/5.,
+            0,
+    ]
+    
+    result = least_squares(err_fn, param, args=(x_data, profile, noise))
+
+    #print(result)
+    
+    U, s, Vh = linalg.svd(result.jac, full_matrices=False)
+    tol = np.finfo(float).eps * s[0] * max(result.jac.shape)
+    w = s > tol
+    cov = (Vh[w].T / s[w] ** 2) @ Vh[w]  # robust covariance matrix
+    perr = np.sqrt(np.diag(cov))  # 1sigma uncertainty on fitted parameters
+    
+    dof = result.fun.size - result.x.size
+    chi2 = np.sum(result.fun**2)
+    rchi2 = chi2 / dof
+    
+    cov *= rchi2
+    perr = np.sqrt(
+        np.diag(cov)
+    )  # 1sigma uncertainty on fitted parameters
+    # print(perr)
+    
+    print("chisq = %.2f" % chi2)
+    # dof is degrees of freedom
+    print("degrees of freedom = %.0f" % dof)
+    print("reduced chisq = %.2f" % rchi2)
+    
+    p = result.x
+    
+    print(p)
+    print(perr)
+    print()
+
+    x_inc = len(profile) / 100.0
+    x_small = np.arange(0, len(profile), x_inc)
+    g1 = gauss_fn(p, x_small)
+
+
+
+    if verb: 
+        fig = plt.figure()
+    
+        ax1 = fig.add_subplot(111)
+    
+        ax1.plot(profile, drawstyle='steps-mid')
+    
+        ax1.plot([x_cen,x_cen], [yp_min,yp_max], "--", c="k", alpha=0.5)
+        ax1.plot([p[1],p[1]], [yp_min,yp_max], "--", c="g", alpha=0.5)
+        ax1.ticklabel_format(axis='y', style='sci', scilimits=(0, 0)) 
+        #ax1.text(0.01, 0.80, "%s" % ind, transform=ax4.transAxes)
+        ax1.plot(x_small, g1, c="g")
+    
+        plt.show()
+
+
+    return p, perr
+
+
+
+def gauss_fn(param, x):
+    # From Dan's gaussfit
+    """Parameters: a0 = height of exp, a1 = center of exp, a2 = sigma
+    (the width)"""
+    a0, a1, a2, a3 = param
+    return a0 * np.exp(-(((x - a1) / a2) ** 2.0) / 2.0) + a3
+
+
+#noise = 1.
+err_fn = lambda p, x, z, noise: (gauss_fn(p, x) - z) / noise
+
+def poly_n(param, x):
+    p = np.array(param)
+    if type(x) == float:
+        y = 0
+    else:
+        y = np.zeros((x.shape[0],))
+    for n in np.arange(p.shape[0]):
+        y += p[n] * x**n
+    return y
+
+def err_fn_poly(p, x, z, noise):
+    return (poly_n(p, x) - z) / noise
+
+
+def MAD(x):
+    #return np.median(np.abs(x-np.median(x)))
+    return np.nanmedian(np.abs(x-np.nanmedian(x)))
+
+def stats(X):
+    x_min = np.nanmin(X)
+    x_max = np.nanmax(X)
+    x_mean = np.nanmean(X)
+    x_median = np.nanmedian(X)
+    x_std = np.nanstd(X)
+    x_mad = MAD(X)
+    x_q23 = np.nanquantile(X, 0.023)
+    x_q159 = np.nanquantile(X, 0.159)
+    x_q841 = np.nanquantile(X, 0.841)
+    x_q977 = np.nanquantile(X, 0.977)        
+
+    stat_dict = {"min": x_min,
+                 "max": x_max,
+                 "mean": x_mean,
+                 "median": x_median,
+                 "std": x_std,
+                 "mad": x_mad,
+                 "q(2.3)": x_q23,
+                 "q(15.9)": x_q159,
+                 "q(84.1)": x_q841,
+                 "q(97.7)": x_q977}
+
+    print("min =", x_min)
+    print("max =", x_max)
+    print("mean =", x_mean)
+    print("median =",  x_median)
+    print("std =", x_std)
+    print("std_mad =", x_mad)
+    print("q( 2.3) =", x_q23)
+    print("q(15.9) =", x_q159)
+    print("q(84.1) =", x_q841)
+    print("q(97.7) =", x_q977)
+
+    return stat_dict
 
 # https://mpdaf.readthedocs.io/en/latest/_modules/mpdaf/obj/coords.html#WCS
 def rotate(wcs_obj, theta):
@@ -417,7 +692,7 @@ def fake_euclid_ref(tbl, ra_cen = 0.0, dec_cen = 0.0, pixel_scale = 0.3, naxis1 
     hdu2[ext].header['PHOTPLAM'] = wav_cen
     hdu2[ext].header['PHOTFLAM'] = photflam
     
-    hdu2.writeto("../" + output, overwrite=True)
+    hdu2.writeto(output, overwrite=True)
             
             
     if verb:
@@ -619,7 +894,15 @@ def euclid_wcs(head):
     return newhead
     
 
-def write_individual_slitless(slitless_file, file_str = "Euclid_DET%s_slitless.fits", rot=0):
+def write_individual_slitless(
+        slitless_file, 
+        file_str = "Euclid_DET%s_slitless.fits", 
+        rot=0, 
+        spec_exptime=574., 
+        spec_gain=None, 
+        correct_dc=0,
+        offset=1024.
+    ):
     
     # Read in Euclid slitless multi-extension fits and write single frame for each detector
 
@@ -650,15 +933,35 @@ def write_individual_slitless(slitless_file, file_str = "Euclid_DET%s_slitless.f
         
             all_slitless.append(slitless)
 
+
+
+
+            if spec_gain == None:             
+                gain_hdu = pyfits.open('preprocess/GAIN_{}.fits'.format(num))
+                GAIN = np.mean(gain_hdu[0].data)
+                print("GAIN =", GAIN)
+            else:
+                GAIN = spec_gain
+
             # test to read conf_file in grismconf.py
             #det = conf_file.split("-")[-1][-2:]
             #print(det)
         
             #head = hdu_old['DET%s.SCI' % (num)].header
-            data = hdu_old['DET%s.SCI' % (num)].data
-            err = hdu_old['DET%s.CHI2' % (num)].data
+            raw = hdu_old['DET%s.SCI' % (num)].data
+            chi2 = hdu_old['DET%s.CHI2' % (num)].data
 
+            sci = (raw - offset)/spec_exptime/GAIN
+            #err = np.sqrt(chi2)/spec_exptime/GAIN
+            err = chi2/spec_exptime/GAIN
 
+            if correct_dc:
+                dc_hdu = pyfits.open('preprocess/DC_{}.fits'.format(num))
+                DC = dc_hdu[0].data
+                sci -= DC
+
+            # clip?
+            #sci[sci < -1.0] = 0.0
 
             # fixes WCS issue in new sims        
             head_wcs = euclid_wcs(hdu_old['DET%s.SCI' % (num)].header)
@@ -744,7 +1047,7 @@ def write_individual_slitless(slitless_file, file_str = "Euclid_DET%s_slitless.f
                 # rotate
                 print("rotating 90 degress")
                 print(num, k)
-                data = np.rot90(data, k=k)
+                sci = np.rot90(sci, k=k)
                 err = np.rot90(err, k=k)
 
 
@@ -768,7 +1071,7 @@ def write_individual_slitless(slitless_file, file_str = "Euclid_DET%s_slitless.f
             hdu = pyfits.PrimaryHDU(header=head0)  
             hdu.name = 'PRIMARY'
     
-            hdu_sci = pyfits.ImageHDU(data, header=head)  
+            hdu_sci = pyfits.ImageHDU(sci, header=head)  
             hdu_sci.name = 'SCI'
             hdu_err = pyfits.ImageHDU(err, header=head)
             hdu_err.name = 'ERR'
@@ -967,10 +1270,10 @@ def wcs_pixel_scale(file, ext=1):
     cdelt1 = cd1_1/cos(crota1)     # deg/pix
     cdelt2 = cd2_2/cos(crota1)     # deg/pix
 
-    print('cdelt1 = %.4f "/pixel' % (cdelt1*3600))
-    print('cdelt2 = %.4f "/pixel' % (cdelt2*3600))
-    print('crota1 = %.4f deg' % (crota1*180/pi))
-    print('crota2 = %.4f deg' % (crota2*180/pi))
+    print('cdelt1 = %.8f "/pixel' % (cdelt1*3600))
+    print('cdelt2 = %.8f "/pixel' % (cdelt2*3600))
+    print('crota1 = %.8f deg' % (crota1*180/pi))
+    print('crota2 = %.8f deg' % (crota2*180/pi))
     print()
 
 
@@ -1336,13 +1639,15 @@ def display_grizli_jwst(root, id, w0=0.8, w1=2.1, labels=1, y0=1, y1=-1, z=None)
 
 def display_grizli(prefix, w0=0.77, w1=1.73, labels=1, y0=-1, y1=-1, z_in=0, path="", lw=2, 
                    fontsize=8, dispersers=['G102','G141'], yscale=1.2, fig=None, cmap='viridis_r',
-                   scale_size=1):
+                   scale_size=1, vmin = None, vmax = None):
 
     from matplotlib.gridspec import GridSpec
     from matplotlib.ticker import MultipleLocator
     import matplotlib.colors as mcolors
     
     colors = list(mcolors.TABLEAU_COLORS)
+
+    info = {}
 
     #f_full = '{0}_{1:05d}.full.fits'.format(root, id)
     f_full = os.path.join(path, prefix + '.full.fits')
@@ -1355,6 +1660,8 @@ def display_grizli(prefix, w0=0.77, w1=1.73, labels=1, y0=-1, y1=-1, z_in=0, pat
     zfit_head = full_hdu['ZFIT_STACK'].header
     templ = Table(full_hdu['TEMPL'].data)
     print()
+
+    
     
     #print(head)
     ndfilts = head["NDFILT"] # number of direct image filters
@@ -1374,6 +1681,10 @@ def display_grizli(prefix, w0=0.77, w1=1.73, labels=1, y0=-1, y1=-1, z_in=0, pat
     #print(f_1d)
     oned_hdu = pyfits.open(f_1d)
     #oned_hdu = pyfits.open(os.path.join(path,f_1d))
+    #print(oned_hdu[0].header)
+
+    info["RA"] = oned_hdu[0].header["RA"]
+    info["DEC"] = oned_hdu[0].header["DEC"]
     print(oned_hdu[1].header)
     print(oned_hdu.info())
 
@@ -1541,10 +1852,21 @@ def display_grizli(prefix, w0=0.77, w1=1.73, labels=1, y0=-1, y1=-1, z_in=0, pat
     ax[3].legend()
     
     # Gabe's routine
-    multifit.show_drizzle_HDU(twod_hdu, mask_segmentation=True, diff=True, average_only=False, cmap=cmap, scale_size=scale_size)
+    multifit.show_drizzle_HDU(
+        twod_hdu, 
+        mask_segmentation=True, 
+        diff=True, 
+        average_only=False, 
+        cmap=cmap, 
+        scale_size=scale_size,
+        vmin = vmin,
+        vmax = vmax,
+    )
+
+    
 
 
-    return ax
+    return ax, info
 
 
 

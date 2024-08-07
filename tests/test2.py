@@ -94,38 +94,50 @@ def new_test(xpix, ypix, xl, yl):
     #x1 = int(xpix + xl/2. + xsign * 0.5)
 
     #print(x0, x1, y0, y1, xl, yl, x1-x0, y1-y0)
+
+
+def kevin_test(xpix, ypix, xl, yl):
+
+    x0 = int(round(xpix-0.5)+1.0-xl/2.)
+    x1 = x0 + xl
+    y0 = int(round(ypix-0.5)+1.0-yl/2.)
+    y1 = y0 + yl
+
+    xpix_new = (x0 + x1)/2.
+    ypix_new = (y0 + y1)/2.
+
+    dx = xpix - xpix_new
+    dy = ypix - ypix_new
+
+    print(x0, x1, y0, y1, xl, yl, x1-x0, y1-y0, dx, dy)
+
 ####################################
 
-###original(1000.0, 1000.000, 21, 21)
-#original(1000.0, 1000.499, 21, 21)
-#original(1000.0, 1000.999, 21, 21)
-#original(-1.0, -1.000, 20, 20)
-#original(-1.0, -1.499, 20, 20)
-#original(-1.0, -1.999, 20, 20)
-#original(-1.0, -1.000, 21, 21)
-#original(-1.0, -1.499, 21, 21)
-#original(-1.0, -1.999, 21, 21)
-
-#print()
+#original(1000.0, 1000.000, 21, 21)
 
 #new(1000.0, 1000.000, 21, 21)
-#new(1000.0, 1000.499, 21, 21)
-#new(1000.0, 1000.999, 21, 21)
-#new(-1.0, -1.000, 20, 20)
-#new(-1.0, -1.499, 20, 20)
-#new(-1.0, -1.999, 20, 20)
-#new(-1.0, -1.000, 21, 21)
-#new(-1.0, -1.499, 21, 21)
-#new(-1.0, -1.999, 21, 21)
+
+#new_test(1000.0, 1000.000, 21, 21)
+
+#kevin_test(1000.0, 1000.000, 21, 21)
 
 
-new_test(1000.0, 1000.000, 21, 21)
-new_test(1000.0, 1000.499, 21, 21)
-new_test(1000.0, 1000.999, 21, 21)
-new_test(-1.0, -1.000, 20, 20)
-new_test(-1.0, -1.499, 20, 20)
-new_test(-1.0, -1.999, 20, 20)
-new_test(-1.0, -1.000, 21, 21)
-new_test(-1.0, -1.222, 21, 21)
-new_test(-1.0, -1.499, 21, 21)
-new_test(-1.0, -1.999, 21, 21)
+xpix = [1000.0, 1000.0,   1000.0,   -1.0, -1.0,   -1.0,   -1.0,   -1.0,   -1.0,   -1.0  ]
+ypix = [1000.0, 1000.499, 1000.999, -1.0, -1.499, -1.999, -1.000, -1.222, -1.499, -1.999]
+xl   = [21,     21,       21,        20,   20,     20,     21,     21,     21,     21]
+yl   = [21,     21,       21,        20,   20,     20,     21,     21,     21,     21]
+
+
+for i in range(len(xpix)):
+
+    print(     xpix[i], ypix[i], xl[i], yl[i])
+    original(  xpix[i], ypix[i], xl[i], yl[i]) # fails
+    new(       xpix[i], ypix[i], xl[i], yl[i]) # fails
+    new_test(  xpix[i], ypix[i], xl[i], yl[i])
+    kevin_test(xpix[i], ypix[i], xl[i], yl[i])
+    print()
+
+
+
+
+

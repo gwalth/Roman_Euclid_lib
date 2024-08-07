@@ -63,6 +63,21 @@ def add_grizli_headers(hdu, hdict, exts=[0,1,2,3]):
 ####################################
 # paramters
 ####################################
+# noise characteristics of "direct image"
+# Scaramella et al. 2022 - Euclid preparation I. The Euclid Wide Survey
+# RGS000, RGS180, RGS000_rot, RGS180_rot
+spec_exptime = 574 # seconds
+#spec_gain = 2.0
+#spec_gain = 6.0
+#spec_gain = 0.5
+spec_gain = None
+offset = 1024.
+rot = 2 # 2nd rotation option
+correct_dc = 1 # use dc file
+fr_str = "FRAME"
+
+
+
 #id_key = "NUMBER"
 #mag_key = "MAG_AUTO"
 #flux_key = "FLUX_AUTO"
@@ -105,10 +120,10 @@ print("root =", root)
 YAML_PATH = os.path.join(HOME_PATH, root)
 
 #dir()
-all_slitless = yaml_dict["all_slitless"]
-all_zodi = yaml_dict["all_zodi"]
-spec_exptime = yaml_dict["spec_exptime"]
-spec_gain = yaml_dict["spec_gain"]
+#all_slitless = yaml_dict["all_slitless"]
+#all_zodi = yaml_dict["all_zodi"]
+#spec_exptime = yaml_dict["spec_exptime"]
+#spec_gain = yaml_dict["spec_gain"]
 all_cat = yaml_dict["all_cat"]
 all_ref_files = yaml_dict["all_ref_files"]
 catalog_files = yaml_dict["catalog_files"]
@@ -133,9 +148,71 @@ all_final_direct = []
 all_final_slitless = []
 
 
-# ## Subtract 1024 from science and sqrt(error), and adjust header keys
+# find all of the frames in the slitless files, hopefully they are all the same
+frames = []
+for sf in slitless_files:
+    L = sf.split("_")
+    frames.append([L[i] for i,l in enumerate(L) if fr_str in l][0])
 
-# In[ ]:
+print(frames)
+
+
+## Write individual files for each extension of the slitless spectra
+# Grizli is easier to manage when writing out all of the files. 
+# At some point we'll want to read the data extensions directly into Grizli, 
+# this is currently a kludge.
+#all_slitless = ["Euclid_FRAME%i" % (i+1) + "_DET%s_slitless.fits" for i,sf in enumerate(slitless_files)]
+all_slitless = []
+for i,sf in enumerate(slitless_files):
+
+    file_str = "Euclid_%s" % (frames[i]) + "_DET%s_slitless.fits"
+
+    tmp_all_slitless = write_individual_slitless(
+        sf, 
+        file_str = file_str,  
+        rot=rot,
+        spec_exptime = spec_exptime,
+        spec_gain = spec_gain,
+        correct_dc = correct_dc,
+        offset = offset,
+    )
+
+    all_slitless.append(tmp_all_slitless)
+
+print(all_slitless)
+#all_zodi = [write_individual_slitless(sf, file_str ="Zodi_%s" % (frames[i]) + "_DET%s_slitless.fits", rot=rot) for i,sf in enumerate(zodi_files)]
+
+
+os.chdir(os.path.join(HOME_PATH, root, 'Prep'))
+
+if plot:
+
+    sf = all_slitless[0][0]
+    pf = pyfits.open(sf)
+
+    data = pf['SCI'].data - offset
+    X = data.flatten()
+
+    data = pf['ERR'].data
+    Y = data.flatten()
+
+    fig = plt.figure()
+
+    ax1 = fig.add_subplot(121)
+    ax1.hist(X,bins=20, range=(0,2000))
+    ax1.set_yscale("log")
+    ax1.set_xlabel("Counts")
+    ax1.set_title("SCI")
+
+    ax2 = fig.add_subplot(122)
+    ax2.hist(Y,bins=20, range=(0,100))
+    ax2.set_yscale("log")
+    ax2.set_xlabel("Counts")
+    ax2.set_title("ERR")
+
+    plt.show()
+
+
 
 
 ###############
@@ -175,14 +252,14 @@ if 0:
         hdu[ext].header['EXTVER'] = ext
         hdu[ext].header['EXPTIME'] = spec_exptime
     
-        sci = hdu[ext].data
+        #sci = hdu[ext].data
         #hdu[ext].data = sci/spec_exptime/gain
-        hdu[ext].data = (sci-1024.)/spec_exptime/spec_gain
+        #hdu[ext].data = (sci-1024.)/spec_exptime/spec_gain
     
     
-        ext = 2
-        chi2 = hdu[ext].data
-        hdu[ext].data = np.sqrt(chi2)/spec_exptime/spec_gain
+        #ext = 2
+        #chi2 = hdu[ext].data
+        #hdu[ext].data = np.sqrt(chi2)/spec_exptime/spec_gain
     
         hdu.writeto(new_slitless, overwrite=True, output_verify='fix')
         print("Writing",new_slitless)
@@ -248,13 +325,13 @@ for j,single_frame in enumerate(all_slitless):
         hdu = pyfits.open(slitless_file)
         hdu.info()
  
-        if all_zodi:
-            zodi_file = all_zodi[i]
-            print(zodi_file)
-            hdu_zodi = pyfits.open(zodi_file)
-            zodi = hdu_zodi[ext].data
-        else:
-            zodi = 0.0
+        #if all_zodi:
+        #    zodi_file = all_zodi[i]
+        #    print(zodi_file)
+        #    hdu_zodi = pyfits.open(zodi_file)
+        #    zodi = hdu_zodi[ext].data
+        #else:
+        #    zodi = 0.0
  
  
         det_id = hdu[0].header['DET_ID']
@@ -268,16 +345,16 @@ for j,single_frame in enumerate(all_slitless):
  
         hdu1 = add_grizli_headers(hdu, slitless_dict)
  
-        ext = 1
-        sci = hdu1[ext].data
+        #ext = 1
+        #sci = hdu1[ext].data
         #hdu[ext].data = sci/spec_exptime/gain
         #hdu1[ext].data = (sci-1024.)/spec_exptime/spec_gain
-        hdu1[ext].data = (1.0*sci - 1.0*zodi)/spec_exptime/spec_gain
+        #hdu1[ext].data = (1.0*sci - 1.0*zodi)/spec_exptime/spec_gain
         
         
-        ext = 2
-        chi2 = hdu1[ext].data
-        hdu1[ext].data = np.sqrt(chi2)/spec_exptime/spec_gain
+        #ext = 2
+        #chi2 = hdu1[ext].data
+        #hdu1[ext].data = np.sqrt(chi2)/spec_exptime/spec_gain
         
         #hdu1.writeto(new_slitless, overwrite=True, output_verify='fix')
         #print("Writing",new_slitless)
@@ -785,7 +862,11 @@ with open('match_clean_tbl.pickle', 'wb') as f:
     # Pickle the 'data' dictionary using the highest protocol available.
     pickle.dump(match_clean_tbl, f, pickle.HIGHEST_PROTOCOL)
 
+yaml_dict['all_slitless'] = all_slitless
+#yaml_dict['all_zodi'] = all_zodi
 yaml_dict["all_final_slitless"] = all_final_slitless
+yaml_dict['spec_exptime'] = spec_exptime
+yaml_dict['spec_gain'] = spec_gain
 
 os.chdir(YAML_PATH)
 with open(os.path.basename(yaml_file), 'w',) as f:

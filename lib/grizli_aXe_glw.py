@@ -8,6 +8,8 @@ import numpy as np
 
 import matplotlib.pyplot as plt
 from matplotlib.patches import Polygon
+from mpl_toolkits.axes_grid1.inset_locator import inset_axes
+from matplotlib.ticker import MultipleLocator
 
 from astropy.table import Table, unique, join
 import astropy.io.fits as pyfits
@@ -15,9 +17,21 @@ import astropy.io.fits as pyfits
 from astropy.wcs import WCS
 
 from scipy import integrate, interpolate
+from grizli_functions import euclid_wcs, remove_basic_wcs, stats, fit_gauss, fit_poly
 
 c = 2.9979e10  # cm/s
 Ang = 1e-8  # cm
+
+
+
+def get_range(img, sigma=5.): 
+
+    X = img.flatten()
+    stat_dict = stats(X)
+    vmin = stat_dict["median"] - sigma * stat_dict["mad"]
+    vmax = stat_dict["median"] + sigma * stat_dict["mad"]
+
+    return vmin, vmax
 
 
 class aXeConf_glw(aXeConf):
@@ -106,13 +120,206 @@ class aXeConf_glw(aXeConf):
         
         return x, y, dx, dy, lam
         
-    def load_files(self, direct_file, slitless_file, offset=0.0):
-        
+    def load_files(self, direct_file, slitless_file, pre_process_path=None, offset=0.0, fix_mosa=1, det='11',
+remove_dc=0, correct_gain=0, gain=None, diag=1, exptime=574., clip_bad=1):
+
+        self.offset = float(offset)
+        self.exptime = float(exptime)
+
+        if (pre_process_path is not None) and remove_dc:
+            dc_file = os.path.join(pre_process_path,"DC_%s.fits" % det)
+            print(dc_file)
+            hdu = pyfits.open(dc_file)
+            self.DC = hdu[0].data
+
+        else:
+            self.DC = 0.
+
+        print("dc = ",self.DC)
+
+
+        #if (pre_process_path is not None) and correct_gain:
+        if (pre_process_path is not None) and correct_gain:
+
+            if gain == None:
+                gain_file = os.path.join(pre_process_path,"GAIN_%s.fits" % det)
+                hdu = pyfits.open(gain_file)
+                self.GAIN = np.mean(hdu[0].data)
+
+            else:
+                self.GAIN = gain
+
+        else:
+            self.GAIN = 1.0
+
+        print("gain = ",self.GAIN)
+
+
         hdu = pyfits.open(slitless_file)
-        # sci, err, dq
-        self.slitless = [hdu[1].data + offset, hdu[2].data, hdu[3].data]
-        self.head_slit = hdu[1].header
-        self.wcs_slit = WCS(header=self.head_slit)
+        
+
+
+        raw = hdu['DET%s.SCI' % (det)].data
+        chi2 = hdu['DET%s.CHI2' % (det)].data
+
+        sci = (raw - self.offset)/self.exptime/self.GAIN
+        #err = np.sqrt(chi2)/self.exptime/self.GAIN
+        err = chi2/self.exptime/self.GAIN
+
+        if remove_dc:
+            sci -= self.DC
+
+
+        if clip_bad:
+            X = sci.flatten()
+            Y = err.flatten()
+
+            print("N =", len(X))
+ 
+            stat_dict = stats(X)
+
+            sigma = 10.
+            x_med = stat_dict["median"]
+            x_mean = stat_dict["mean"]
+            x_clip_min = stat_dict["median"] - sigma * stat_dict["mad"]
+            x_clip_max = stat_dict["median"] + sigma * stat_dict["mad"]
+            print(x_clip_min, x_clip_max)
+
+            filt = (X > x_clip_min) & (X < x_clip_max) 
+
+            X_clip = X[filt]
+
+            print("N =", len(X_clip))
+            print("pixels clipped =", len(X) - len(X_clip))
+            print("fraction of good pixels =", len(X_clip)/len(X))
+             
+            fig = plt.figure(figsize=(10,5))
+          
+            ax1 = fig.add_subplot(121)
+            #ax1.hist(X, bins=20, range=(0,2000)) # Counts
+            #ax1.hist(X, bins=200)
+            ax1.hist(X, bins=100, range=(-1, 1))
+            y0, y1 = ax1.get_ylim()
+
+            ax1.plot([x_mean, x_mean], [y0,y1], c="tab:green", lw=2, label=r"$\bar{x}$") 
+            ax1.plot([x_med, x_med], [y0, y1],"-", lw=2, c="tab:orange", label=r"$x_{\rm median}$")
+            ax1.plot([x_clip_max, x_clip_max],[y0,y1],"--",lw=2, c="tab:orange",
+                label=r"$x_{\rm median}+\sigma_{\rm MAD}$") 
+            ax1.plot([x_clip_min, x_clip_min],[y0,y1],"--",lw=2, c="tab:orange",
+                label=r"$x_{\rm median}-\sigma_{\rm MAD}$") 
+            print(y0,y1)
+
+
+            ax1.set_yscale("log")
+            ax1.set_ylim(y0,y1)
+            #ax1.set_xlabel("Counts")
+            ax1.set_xlabel("ADU/s")
+            ax1.set_title("SCI")
+            #ax1.xaxis.set_major_locator(MultipleLocator(5))
+          
+            ax_ins = inset_axes(
+                ax1, 
+                width="100%", 
+                height="100%",
+                bbox_to_anchor=(0.125, 0.675, 0.3, 0.3), # right side
+                bbox_transform=ax1.transAxes,
+                borderpad=0
+            )
+          
+            ax_ins.hist(X, bins=20)
+            ax_ins.set_yscale("log")
+            #ax_ins.set_xlabel("Counts")
+            ax_ins.set_xlabel("ADU/s")
+          
+            ax_ins.xaxis.set_major_locator(MultipleLocator(10))
+            #ax_ins.xaxis.set_minor_locator(MultipleLocator(0.1))
+            #ax_ins.yaxis.set_major_locator(MultipleLocator(200))
+            #ax_ins.yaxis.set_minor_locator(MultipleLocator(50))
+          
+            #ax_ins.tick_params(which='major', width=2)
+            #ax_ins.tick_params(which='minor', width=1)
+
+            leg = ax1.legend()
+          
+          
+            ax2 = fig.add_subplot(122)
+            #ax2.hist(Y,bins=20, range=(0,100)) # Counts
+            ax2.hist(Y, bins=100)
+            ax2.set_yscale("log")
+            #ax2.set_xlabel("Counts")
+            ax2.set_xlabel("ADU/s")
+            ax2.set_title("ERR")
+          
+            plt.show()
+
+
+
+
+            fig = plt.figure()
+            
+            print()
+            vmin, vmax = get_range(sci, sigma=5.) 
+            print(vmin, vmax)
+            print()
+            
+            ax1 = fig.add_subplot(121)
+            ax1.imshow(sci, vmin=vmin, vmax=vmax, origin="lower")
+            
+            #sci_clip = sci[sci < x_clip_min] = -99
+            print("N(F < %.2f) =" % (x_clip_min), len(sci[sci < x_clip_min]))
+            print("N(F < -0.25) =", len(sci[sci < -0.25]))
+            print("N(F < -0.50) =", len(sci[sci < -0.50]))
+            
+            sci[sci < x_clip_min] = np.nan
+            
+            ax2 = fig.add_subplot(122)
+            ax2.imshow(sci, vmin=vmin, vmax=vmax, origin="lower")
+            
+            plt.show()
+
+
+
+        # sci, err
+        self.slitless = [sci, err]
+        self.head_slit = hdu['DET%s.SCI' % (det)].header
+
+
+        if diag:
+
+           fig = plt.figure()
+
+           print()
+           vmin, vmax = get_range(raw, sigma=5.) 
+           print(vmin, vmax)
+           print()
+
+           ax1 = fig.add_subplot(121)
+           ax1.imshow(raw, vmin=vmin, vmax=vmax, origin="lower")
+
+
+           print()
+           vmin, vmax = get_range(sci, sigma=5.) 
+           print(vmin, vmax)
+           print()
+
+           ax2 = fig.add_subplot(122)
+           ax2.imshow(sci, vmin=vmin, vmax=vmax, origin="lower")
+
+
+           plt.show()
+
+           #sys.exit()
+           
+
+
+
+        if fix_mosa:
+            self.head_wcs = euclid_wcs( self.head_slit )
+        else:
+            self.head_wcs = self.head_slit 
+
+        self.wcs_slit = WCS(self.head_wcs)
+        print(self.wcs_slit)
         self.footprint_slit = self.wcs_slit.calc_footprint(header=self.head_slit)
 
         hdu = pyfits.open(direct_file)
@@ -123,11 +330,14 @@ class aXeConf_glw(aXeConf):
         self.footprint_direct = self.wcs_direct.calc_footprint(header=self.head_direct)
 
     def get_beam_cutout(self, xc, yc, aper, beam = 'A', dx0 = -100, dx1 = 250, offset=0.0):
+        print("get_beam_cutout")
         
         x, y, dx, dy, lam = self.get_beam(xc, yc, beam=beam, dx0 = dx0, dx1 = dx1)
         
         self.aper = aper
         self.aper_hw = aper/2.
+
+        print("y =", y)
 
         # the ends are causing problems with the interpolation 
         x0 = int(np.min(x) + 1) 
@@ -136,33 +346,43 @@ class aXeConf_glw(aXeConf):
         y1 = int(np.max(y + self.aper_hw) + 0.5)
         
         interp_wav = interpolate.interp1d(x, lam)
+        interp_y_dist = interpolate.interp1d(lam, y)
 
-        print(x0, x1)
-        print(y0, y1)
+        print("(x0, x1) =", x0, x1)
+        print("(y0, y1) =", y0, y1)
+        print("(xc, yc) =", xc, yc)
 
         if x0 < 0: x0 = 0
         if x1 >= 2048: x1 = 2048
+
+        # converting to prime coordinates (cutout coordinates)
+        self.xp = xc - x0
+        self.yp = yc - y0
+        self.dxp = self.dx + self.xp
+        self.dyp = self.dy + self.yp
         
         self.pix = np.arange(x0,x1,1)
         self.wav = [interp_wav(p) for p in self.pix]
+        self.y_dist = np.array([interp_y_dist(w) for w in self.wav])
 
 
 
         self.cutout = [
             self.slitless[0][y0:y1,x0:x1] + offset, 
             self.slitless[1][y0:y1,x0:x1], 
-            self.slitless[2][y0:y1,x0:x1]
         ]
         
         return self.cutout
 
     def get_beam_invert_cutout(self, xc, yc, aper, beam = 'A', dy0 = -100, dy1 = 250, offset=0.0):
+
+        print("get_beam_invert_cutout")
         
         x, y, dx, dy, lam = self.get_beam_invert(xc, yc, beam=beam, dy0 = dy0, dy1 = dy1)
         
         self.aper = aper
         self.aper_hw = aper/2.
-        print(y)
+        #print("y =", y)
 
         # the ends are causing problems with the interpolation 
         y0 = int(np.min(y) + 1) 
@@ -171,21 +391,29 @@ class aXeConf_glw(aXeConf):
         x1 = int(np.max(x + self.aper_hw) + 0.5)
         
         interp_wav = interpolate.interp1d(y, lam)
+        interp_y_dist = interpolate.interp1d(lam, x)
 
-        print(x0, x1)
-        print(y0, y1)
+        print("(x0, x1) =", x0, x1)
+        print("(y0, y1) =", y0, y1)
+        print("(xc, yc) =", xc, yc)
 
         if y0 < 0: y0 = 0
         if y1 >= 2048: y1 = 2048
+
+        # converting to prime coordinates (cutout coordinates)
+        self.xp = xc - x0
+        self.yp = yc - y0
+        self.dxp = self.dx + self.xp
+        self.dyp = self.dy + self.yp
         
         self.pix = np.arange(y0,y1,1)
-        self.wav = [interp_wav(p) for p in self.pix]
+        self.wav = np.array([interp_wav(p) for p in self.pix])
+        self.y_dist = np.array([interp_y_dist(w) for w in self.wav])
 
 
         self.cutout = [
             self.slitless[0][y0:y1,x0:x1] + offset, 
             self.slitless[1][y0:y1,x0:x1], 
-            self.slitless[2][y0:y1,x0:x1]
         ]
         
         return self.cutout
@@ -278,22 +506,45 @@ class aXeConf_glw(aXeConf):
             print("q(84.1) =", np.quantile(self.cutout[0], 0.841))
             print("q(97.7) =", np.quantile(self.cutout[0], 0.977))        
         
-        fig = plt.figure(figsize=(10,2.5))
+        #fig = plt.figure(figsize=(10,2.5))
+        fig = plt.figure()
 
-        ax1 = fig.add_subplot(121)
+        print(self.x)
+        print(self.y)
+        print(self.dx)
+        print(self.dy)
+        print(self.xc)
+        print(self.yc)
+
+        ax1 = fig.add_subplot(211)
         if flip_axes:
             ax1.imshow(self.cutout[0].T, origin="lower", vmin=vmin, vmax=vmax)
-            #ax1.plot(self.dy+100, self.dx+self.aper_hw-1., "--", c="tab:red")
+            ax1.plot(self.dyp, self.dxp - 1, "--", c="tab:red")
+            ax1.plot(self.dyp, self.dxp - self.aper_hw - 1, "-", c="tab:red")
+            ax1.plot(self.dyp, self.dxp + self.aper_hw - 1, "-", c="tab:red")
+            #ax1.plot(self.dy+self.yp, self.dx+self.xp-1, "--", c="tab:red")
+            #ax1.plot(self.dy+self.yp, self.dx+self.xp-self.aper_hw-1., "-", c="tab:red")
+            #ax1.plot(self.dy+self.yp, self.dx+self.xp+self.aper_hw-1., "-", c="tab:red")
+
+            #y = x + c
+
+            #filt1 = 
+            
         else:
             ax1.imshow(self.cutout[0], origin="lower", vmin=vmin, vmax=vmax)
-            #ax1.plot(self.dx+100, self.dy+self.aper_hw-1., "--", c="tab:red")
+            ax1.plot(self.dxp, self.dyp - 1, "--", c="tab:red")
+            ax1.plot(self.dxp, self.dyp - self.aper_hw - 1, "-", c="tab:red")
+            ax1.plot(self.dxp, self.dyp + self.aper_hw - 1, "-", c="tab:red")
+            #ax1.plot(self.dx+self.xp, self.dy+self.yp-1, "--", c="tab:red")
+            #ax1.plot(self.dx+self.xp, self.dy+self.yp-self.aper_hw-1., "-", c="tab:red")
+            #ax1.plot(self.dx+self.xp, self.dy+self.yp+self.aper_hw-1., "-", c="tab:red")
 
-        ax1.set_aspect(5.)
+        ax1.set_aspect(3.)
 
-        ax2 = fig.add_subplot(122)
+        ax2 = fig.add_subplot(212)
         #ax2.plot(self.profile)
         ax2.plot(self.profile, drawstyle="steps-mid")
-        ax2.set_aspect("auto")
+        #ax2.set_aspect("auto")
 
         plt.show()
         
@@ -345,6 +596,7 @@ class aXeConf_glw(aXeConf):
         ax1.imshow(self.slitless[0], origin="lower", vmin=vmin, vmax=vmax)
 
         #ax1.plot(x,y,"--",c="tab:red")
+        print(self.xc,self.yc)
         ax1.plot(self.x, self.y - self.aper_hw, "--", c="tab:red")
         ax1.plot(self.x, self.y + self.aper_hw, "--", c="tab:red")
         
@@ -462,11 +714,95 @@ class aXeConf_glw(aXeConf):
         ax1.legend()
         
         plt.show()
+
+
+    def clip_bad_pixels(self, thresh=1):
+
+        cutout = self.cutout[0]
+
+    def spectral_trace(self, disp_axis=0, nseg=-1, vmin=-1, vmax=1, flip_axes=0):
+
+        cutout = self.cutout[0]
+        print(cutout.shape)
+
+        N = cutout.shape[disp_axis]
+        print(N)
+
+
+        nl = np.arange(N)
+
+        #nseg = 23
+        #nseg = 56
+        #nseg = 557
+        if nseg == -1:
+            nseg = N
+        
+        seg = int(N/nseg)
+        print(seg)
+
+
+        params = []
+        param_errors = []
+
+
+        nl_bin = []
+
+        for i in range(nseg):
+        #for i in range(N):
+
+            if disp_axis == 0:
+                #profile0 = cutout[i,:]
+                profile0 = np.nansum(cutout[i*seg:(i+1)*seg, :], axis=0)
+            
+            elif disp_axis == 1:
+                #profile0 = cutout[:,i]
+                profile0 = np.nansum(cutout[:, i*seg:(i+1)*seg], axis=1)
+
+            nl_bin.append(np.mean(nl[i*seg:(i+1)*seg]))
+
+            p, perr = fit_gauss(profile0, verb=0, noise=0.05)
+
+            params.append(p)
+            param_errors.append(perr)
+
+        nl_bin = np.array(nl_bin)
+
+        params = np.array(params)
+        param_errors = np.array(param_errors)
+
+        print(params)
+        print(param_errors)
+
+
+        fig = plt.figure()
+
+        ax1 = fig.add_subplot(211)
+
+        if flip_axes==0:
+            ax1.imshow(cutout, origin="lower", vmin=vmin, vmax=vmax)
+        elif flip_axes==1:
+            ax1.imshow(cutout.T, origin="lower", vmin=vmin, vmax=vmax)
+
+        ax1.scatter(nl_bin, params[:,1], marker="x", c="tab:red")
+        ax1.set_aspect(3.)
+
+        ax2 = fig.add_subplot(212)
+        ax2.errorbar(nl_bin, params[:,1], yerr=param_errors[:,1])
+
+        ax2.set_xlabel("X pos (pixels)")
+        ax2.set_ylabel("Y fit (pixels)")
+
+
+        plt.show()
+            
+        fit_poly(nl_bin, params[:,1], param=[0, 1])
+
+          
         
     def extract_cutout(self, disp_axis=0, spatial_axis=1, flip_axis=0):
 
-        raw_sci = np.sum(self.cutout[0], axis=disp_axis)
-        raw_err = np.sqrt(np.sum(self.cutout[1]**2, axis=disp_axis))
+        raw_sci = np.nansum(self.cutout[0], axis=disp_axis)
+        raw_err = np.sqrt(np.nansum(self.cutout[1]**2, axis=disp_axis))
 
         print(self.wav[0], self.wav[-1])
         print(len(self.wav))
@@ -489,7 +825,7 @@ class aXeConf_glw(aXeConf):
             flux_err,
         ]
 
-        self.profile = np.sum(self.cutout[0], axis=spatial_axis)
+        self.profile = np.nansum(self.cutout[0], axis=spatial_axis)
 
         return self.spectrum, self.profile
 
@@ -693,16 +1029,16 @@ class EuclidData:
         catalog1 = "TestPoints_highSNR_mod1_14324.fits",
         catalog2 = "NIS_detector_catalog_11.cat",
         model_spectra = "NIS_catalog_file_11.spc.fits",
-        euclud_sims_path = "/Users/gwalth/data/Roman/grizli/sims/Euclid/Raw/EuclidSIMS/",
+        euclid_sims_path = "/Users/gwalth/data/Roman/grizli/sims/Euclid/Raw/EuclidSIMS/",
         catalog1_path = "./",
         catalog2_path = "TestPoints_highSNR_mod1_14324_2023_05_26/frame1/Catalogs/",
         model_spectra_path = "TestPoints_highSNR_mod1_14324_2023_05_26/frame1/Spectra/",
     ):
         
-        catalog1_file = euclud_sims_path + catalog1_path + catalog1
-        catalog2_file = euclud_sims_path + catalog2_path + catalog2
+        catalog1_file = euclid_sims_path + catalog1_path + catalog1
+        catalog2_file = euclid_sims_path + catalog2_path + catalog2
         
-        self.model_spectra_file = euclud_sims_path + model_spectra_path + model_spectra
+        self.model_spectra_file = euclid_sims_path + model_spectra_path + model_spectra
         
         ##########
         # catalog1

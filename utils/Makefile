@@ -1,10 +1,11 @@
+# Create the reference images
 clean-1:
-	-rm Euclid_FRAME?_DET??_slitless.fits
 	-rm Euclid-NISP_?_ref.fits
 	-rm Euclid-VIS_ref.fits
 	-rm Euclid-total_ref.fits
 	-rm coord_offset.fits
 
+# Run SE/SEP on the images
 clean-2:
 	-rm Euclid-VIS_ref_*
 	-rm Euclid-VIS_ref.cat
@@ -13,10 +14,13 @@ clean-2:
 	-rm Euclid-total_ref_*
 	-rm Euclid-total_ref.cat
 
+# Preprocess and prepare the slitless spectra frames
 clean-3:
+	-rm Euclid_FRAME?_DET??_slitless.fits
 	-rm Euclid_FRAME?_DET??_slitless_final.fits
 	-rm all_phot_matched_clean.pickle
 
+# Model the sources
 clean-4:
 	-rm Euclid_DET??_GrismFLT.pickle
 	

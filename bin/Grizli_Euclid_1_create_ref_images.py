@@ -122,8 +122,7 @@ print('\n Astropy version: ', astropy.__version__)
 plot = 1
 mag_zero = [25.6, 25.04, 25.26, 25.21, 26.0]
 yaml_file = f"config.yaml"
-rot = 2 # 2nd rotation option
-fr_str = "FRAME"
+
 
 
 ####################################
@@ -234,21 +233,13 @@ print("root =", root)
 
 slitless_files = yaml_dict["slitless_files"]
 catalog_files = yaml_dict["catalog_files"]
-zodi_files = yaml_dict["zodi_files"]
+#zodi_files = yaml_dict["zodi_files"]
 
 
 YAML_PATH = os.path.join(HOME_PATH, root)
 
 os.chdir(os.path.join(HOME_PATH, root, 'Prep'))
 
-
-# find all of the frames in the slitless files, hopefully they are all the same
-frames = []
-for sf in slitless_files:
-    L = sf.split("_")
-    frames.append([L[i] for i,l in enumerate(L) if fr_str in l][0])
-
-print(frames)
 
 
 # First test
@@ -314,43 +305,6 @@ print(catalog_files)
 # detector header names
 all_det = euclid_det()
 
-
-## Write individual files for each extension of the slitless spectra
-# Grizli is easier to manage when writing out all of the files. 
-# At some point we'll want to read the data extensions directly into Grizli, 
-# this is currently a kludge.
-#all_slitless = ["Euclid_FRAME%i" % (i+1) + "_DET%s_slitless.fits" for i,sf in enumerate(slitless_files)]
-all_slitless = [write_individual_slitless(sf, file_str = "Euclid_%s" % (frames[i]) + "_DET%s_slitless.fits", rot=rot) for i,sf in enumerate(slitless_files)]
-all_zodi = [write_individual_slitless(sf, file_str ="Zodi_%s" % (frames[i]) + "_DET%s_slitless.fits", rot=rot) for i,sf in enumerate(zodi_files)]
-
-os.chdir(os.path.join(HOME_PATH, root, 'Prep'))
-
-if plot:
-
-    sf = all_slitless[0][0]
-    pf = pyfits.open(sf)
-
-    data = pf['SCI'].data - 1024.
-    X = data.flatten()
-
-    data = pf['ERR'].data
-    Y = data.flatten()
-
-    fig = plt.figure()
-
-    ax1 = fig.add_subplot(121)
-    ax1.hist(X,bins=20, range=(0,2000))
-    ax1.set_yscale("log")
-    ax1.set_xlabel("Counts")
-    ax1.set_title("SCI")
-
-    ax2 = fig.add_subplot(122)
-    ax2.hist(Y,bins=20, range=(0,100))
-    ax2.set_yscale("log")
-    ax2.set_xlabel("Counts")
-    ax2.set_title("ERR")
-
-    plt.show()
 
 
 # Plot the slitless extensions
@@ -584,15 +538,20 @@ print(primer.colnames)
 
 # Mauri et al. 2020
 # (ropper et al. 2016
-os.chdir(os.path.join(HOME_PATH, root, 'Prep', 'Input_Thumbnails'))
+#os.chdir(os.path.join(HOME_PATH, root, 'Prep', 'Input_Thumbnails'))
 
 # noise characteristics of "direct image"
 # Scaramella et al. 2022 - Euclid preparation I. The Euclid Wide Survey
 # RGS000, RGS180, RGS000_rot, RGS180_rot
-spec_exptime = 574 # seconds
+#spec_exptime = 574 # seconds
 #spec_gain = 2.0
-spec_gain = 6.0
+#spec_gain = 6.0
+#spec_gain = 0.5
 
+os.chdir(os.path.join(HOME_PATH, root, 'Prep'))
+
+#pixel_scale = 0.3
+pixel_scale = 0.2976
 
 nexp = 4 
 
@@ -622,7 +581,7 @@ t0 = time.time()
 
 print("Creating VIS reference image")
 test_fluxes_vis, test_mags_vis, test_offset = fake_euclid_ref(final_tbl, ra_cen = ra_avg, dec_cen = dec_avg, 
-                                         pixel_scale = 0.3, flux_key=flux_key, mag_key=mag_key, id_key=id_key, 
+                                         pixel_scale = pixel_scale, flux_key=flux_key, mag_key=mag_key, id_key=id_key, 
                                          gain=dir_gain, background=background, exptime=dir_exptime, 
                                          nexp=nexp, readnoise=readnoise, wav_cen=wav_cen, 
                                          wav_width=wav_width, eff_tot=eff_tot, output=output, 
@@ -668,7 +627,7 @@ photflam = calc_photflam(ZP, wav_cen) # photplam
 
 print("Creating NISP_Y reference image")
 test_fluxes_nisp_y, test_mags_nisp_y, _ = fake_euclid_ref(final_tbl, ra_cen = ra_avg, dec_cen = dec_avg, 
-                                         pixel_scale = 0.3, flux_key=flux_key, mag_key=mag_key, id_key=id_key,
+                                         pixel_scale = pixel_scale, flux_key=flux_key, mag_key=mag_key, id_key=id_key,
                                          gain=dir_gain, background=background, exptime=dir_exptime, 
                                          nexp=nexp, readnoise=readnoise, wav_cen=wav_cen, 
                                          wav_width=wav_width, eff_tot=eff_tot, output=output,
@@ -698,7 +657,7 @@ photflam = calc_photflam(ZP, wav_cen) # photplam
 
 print("Creating NISP_J reference image")
 test_fluxes_nisp_j, test_mags_nisp_j, _ = fake_euclid_ref(final_tbl, ra_cen = ra_avg, dec_cen = dec_avg, 
-                                         pixel_scale = 0.3, flux_key=flux_key, mag_key=mag_key, id_key=id_key,
+                                         pixel_scale = pixel_scale, flux_key=flux_key, mag_key=mag_key, id_key=id_key,
                                          gain=dir_gain, background=background, exptime=dir_exptime, 
                                          nexp=nexp, readnoise=readnoise, wav_cen=wav_cen, 
                                          wav_width=wav_width, eff_tot=eff_tot, output=output,
@@ -728,7 +687,7 @@ photflam = calc_photflam(ZP, wav_cen) # photplam
 
 print("Creating NISP_H reference image")
 test_fluxes_nisp_h, test_mags_nisp_h, _ = fake_euclid_ref(final_tbl, ra_cen = ra_avg, dec_cen = dec_avg, 
-                                         pixel_scale = 0.3, flux_key=flux_key, mag_key=mag_key, id_key=id_key,
+                                         pixel_scale = pixel_scale, flux_key=flux_key, mag_key=mag_key, id_key=id_key,
                                          gain=dir_gain, background=background, exptime=dir_exptime, 
                                          nexp=nexp, readnoise=readnoise, wav_cen=wav_cen, 
                                          wav_width=wav_width, eff_tot=eff_tot, output=output,
@@ -788,10 +747,8 @@ if plot:
 
 yaml_dict['ref_files'] = ref_files
 yaml_dict['mag_zero'] = mag_zero
-yaml_dict['all_slitless'] = all_slitless
-yaml_dict['all_zodi'] = all_zodi
-yaml_dict['spec_exptime'] = spec_exptime
-yaml_dict['spec_gain'] = spec_gain
+#yaml_dict['all_slitless'] = all_slitless
+#yaml_dict['all_zodi'] = all_zodi
 yaml_dict['nexp'] = nexp
 
 os.chdir(YAML_PATH)

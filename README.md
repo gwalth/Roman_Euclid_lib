@@ -119,21 +119,25 @@ source ~/sandbox.sh  # sex and ds9
 # modify Grizli_Euclid_1_create_ref_images.py to files and catalogs
 ```
 
+export EUCLID_SIM=/Users/gwalth/data/Roman/grizli/sims/Euclid/FSpatch_mod3_16183_TAcalib_V1_RNDC_2024-03-11
 export EUCLID_SIM=/Users/gwalth/data/Roman/grizli/sims/Euclid/FSpatch_mod3_16183_TAcalib_V1_RNDC_2024-03-11_v1
 export EUCLID_SIM=/Users/gwalth/data/Roman/grizli/sims/Euclid/FSpatch_mod3_16183_TAcalib_V1_RNDC_2024-03-11_v2
+export EUCLID_SIM=/Users/gwalth/data/Roman/grizli/sims/Euclid/FSpatch_mod3_16183_TAcalib_V1_R_newGRID_2024-05-17
 
 
 cd $EUCLID_SIM
-Grizli_Euclid_0_build_yaml.py --home_path /Users/gwalth/data/Roman/grizli/sims/Euclid --dir_root FSpatch_mod3_16183_TAcalib_V1_RNDC_2024-03-11_v1 --slitless slitless_input --catalog catalog_input
-Grizli_Euclid_0_build_yaml.py --home_path /Users/gwalth/data/Roman/grizli/sims/Euclid --dir_root FSpatch_mod3_16183_TAcalib_V1_RNDC_2024-03-11_v2 --slitless slitless_input --catalog catalog_input
+#Grizli_Euclid_0_build_yaml.py --home_path /Users/gwalth/data/Roman/grizli/sims/Euclid --dir_root FSpatch_mod3_16183_TAcalib_V1_RNDC_2024-03-11_v1 --slitless slitless_input --catalog catalog_input
+#Grizli_Euclid_0_build_yaml.py --home_path /Users/gwalth/data/Roman/grizli/sims/Euclid --dir_root FSpatch_mod3_16183_TAcalib_V1_RNDC_2024-03-11_v2 --slitless slitless_input --catalog catalog_input
+Grizli_Euclid_0_build_yaml.py --home_path /Users/gwalth/data/Roman/grizli/sims/Euclid --dir_root FSpatch_mod3_16183_TAcalib_V1_R_newGRID_2024-05-17 --slitless slitless.cat --catalog catalog.cat --thumbnails thumbnails.cat --create
+Grizli_Euclid_0_build_yaml.py --home_path /Users/gwalth/data/Roman/grizli/sims/Euclid --dir_root FSpatch_mod3_16183_TAcalib_V1_R_newGRID_2024-05-17 --slitless slitless.cat --catalog catalog.cat --thumbnails thumbnails.cat 
 
 Grizli_Euclid_1_create_ref_images.py config.yaml
 Grizli_Euclid_2_run_SE.py config.yaml
 Grizli_Euclid_3_prep_SE.py config.yaml
 Grizli_Euclid_4_model_SE.py config.yaml
 
-cd $ROMAN_EUCLID_LIB
 sh test_fit_redshifts.sh
+sh test_fit_redshifts_v2.sh
 
 cd $EUCLID_SIM/Extractions
 ls *stack.fits | wc   # should be 16
@@ -142,5 +146,7 @@ python $ROMAN_EUCLID_LIB/tests/test_inspect2d.py "*stack.fits"
 python $ROMAN_EUCLID_LIB/tests/test_inspect2d.py "*beams.fits"
 ```
 
-
+```
+python $ROMAN_EUCLID_LIB/tests/test_display1d.py FSpatch_mod3_16183_TAcalib_V1_RNDC_2024-03-11 DET11 160
+```
 

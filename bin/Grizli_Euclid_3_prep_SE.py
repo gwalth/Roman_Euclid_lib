@@ -13,12 +13,15 @@ from astropy.table import Table, unique, join, vstack
 import astropy.units as u
 from astropy.coordinates import SkyCoord
 
+
+
 import numpy as np
 
 import matplotlib as mpl    
 import matplotlib.pyplot as plt
+from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 #from matplotlib.gridspec import GridSpec
-#from matplotlib.ticker import MultipleLocator
+from matplotlib.ticker import MultipleLocator
 
 #from IPython.display import Image
 
@@ -52,6 +55,23 @@ T_START = time.time()
 ####################################
 # paramters
 ####################################
+# noise characteristics of "direct image"
+# Scaramella et al. 2022 - Euclid preparation I. The Euclid Wide Survey
+# RGS000, RGS180, RGS000_rot, RGS180_rot
+spec_exptime = 574 # seconds
+#spec_gain = None
+spec_gain = None
+spec_gain = 0.25
+#spec_gain = 0.5
+#spec_gain = 1.0
+#spec_gain = 6.1
+offset = 1024.
+rot = 2 # 2nd rotation option
+correct_dc = 0 # use dc file
+fr_str = "FRAME"
+
+
+
 id_key = "NUMBER"
 mag_key = "MAG_AUTO"
 flux_key = "FLUX_AUTO"
@@ -90,12 +110,13 @@ print("root =", root)
 YAML_PATH = os.path.join(HOME_PATH, root)
 
 #dir()
-all_slitless = yaml_dict["all_slitless"]
-all_zodi = yaml_dict["all_zodi"]
-spec_exptime = yaml_dict["spec_exptime"]
-spec_gain = yaml_dict["spec_gain"]
+#all_slitless = yaml_dict["all_slitless"]
+#all_zodi = yaml_dict["all_zodi"]
+#spec_exptime = yaml_dict["spec_exptime"]
+#spec_gain = yaml_dict["spec_gain"]
 all_cat = yaml_dict["all_cat"]
 all_ref_files = yaml_dict["all_ref_files"]
+slitless_files = yaml_dict["slitless_files"]
 catalog_files = yaml_dict["catalog_files"]
 phot_mode = yaml_dict["phot_mode"] 
 
@@ -105,8 +126,8 @@ Euclid_bands_flux = ['TU_FNU_VIS_MAG', 'TU_FNU_Y_NISP_MAG', 'TU_FNU_J_NISP_MAG',
 # ## Add all of the header metadata needed for Grizli
 
 
-print(all_slitless)
-print(spec_exptime)
+#print(all_slitless)
+#print(spec_exptime)
 
 
 
@@ -122,6 +143,15 @@ all_final_slitless = []
 
 # In[ ]:
 
+# find all of the frames in the slitless files, hopefully they are all the same
+frames = []
+for sf in slitless_files:
+    L = sf.split("_")
+    frames.append([L[i] for i,l in enumerate(L) if fr_str in l][0])
+
+print(frames)
+
+
 
 
 #for j,single_frame in enumerate(all_slitless):
@@ -129,6 +159,94 @@ all_final_slitless = []
 #        print(slitless_file)
 #sys.exit()
 
+## Write individual files for each extension of the slitless spectra
+# Grizli is easier to manage when writing out all of the files. 
+# At some point we'll want to read the data extensions directly into Grizli, 
+# this is currently a kludge.
+#all_slitless = ["Euclid_FRAME%i" % (i+1) + "_DET%s_slitless.fits" for i,sf in enumerate(slitless_files)]
+all_slitless = []
+for i,sf in enumerate(slitless_files):
+
+    file_str = "Euclid_%s" % (frames[i]) + "_DET%s_slitless.fits"
+
+    tmp_all_slitless = write_individual_slitless(
+        sf, 
+        file_str = file_str,  
+        rot=rot,
+        spec_exptime = spec_exptime,
+        spec_gain = spec_gain,
+        correct_dc = correct_dc,
+        offset = offset,
+    )
+
+    all_slitless.append(tmp_all_slitless)
+
+print(all_slitless)
+#all_zodi = [write_individual_slitless(sf, file_str ="Zodi_%s" % (frames[i]) + "_DET%s_slitless.fits", rot=rot) for i,sf in enumerate(zodi_files)]
+
+os.chdir(os.path.join(HOME_PATH, root, 'Prep'))
+
+if plot:
+
+    sf = all_slitless[0][0]
+    pf = pyfits.open(sf)
+
+    data = pf['SCI'].data
+    #data = pf['SCI'].data - offset
+    X = data.flatten()
+
+    data = pf['ERR'].data
+    Y = data.flatten()
+
+    fig = plt.figure(figsize=(10,5))
+
+    ax1 = fig.add_subplot(121)
+    #ax1.hist(X, bins=20, range=(0,2000)) # Counts
+    #ax1.hist(X, bins=200)
+    ax1.hist(X, bins=100, range=(-1, 1))
+    ax1.set_yscale("log")
+    #ax1.set_xlabel("Counts")
+    ax1.set_xlabel("ADU/s")
+    ax1.set_title("SCI")
+    #ax1.xaxis.set_major_locator(MultipleLocator(5))
+
+    ax_ins = inset_axes(
+        ax1, 
+        width="100%", 
+        height="100%",
+        bbox_to_anchor=(0.125, 0.675, 0.3, 0.3), # right side
+        bbox_transform=ax1.transAxes,
+        borderpad=0
+    )
+
+    ax_ins.hist(X, bins=20)
+    ax_ins.set_yscale("log")
+    #ax_ins.set_xlabel("Counts")
+    ax_ins.set_xlabel("ADU/s")
+
+    ax_ins.xaxis.set_major_locator(MultipleLocator(10))
+    #ax_ins.xaxis.set_minor_locator(MultipleLocator(0.1))
+    #ax_ins.yaxis.set_major_locator(MultipleLocator(200))
+    #ax_ins.yaxis.set_minor_locator(MultipleLocator(50))
+
+    #ax_ins.tick_params(which='major', width=2)
+    #ax_ins.tick_params(which='minor', width=1)
+
+
+    ax2 = fig.add_subplot(122)
+    #ax2.hist(Y,bins=20, range=(0,100)) # Counts
+    ax2.hist(Y, bins=100)
+    ax2.set_yscale("log")
+    #ax2.set_xlabel("Counts")
+    ax2.set_xlabel("ADU/s")
+    ax2.set_title("ERR")
+
+    plt.show()
+
+
+
+
+#sys.exit()
 
 ###############
 ### SPECTRA ###
@@ -155,22 +273,29 @@ for j,single_frame in enumerate(all_slitless):
         
         grism = hdu[0].header["GWA_POS"]
         det_id = hdu[1].header["DET_ID"]
+        tilt = hdu[0].header["GWA_TILT"]
         
-        fake_filter = "-".join([grism,det_id])
-        print(fake_filter)
+        #fake_filter = "-".join([grism,det_id])
+        #print(fake_filter)
+
+        if tilt < 0: ang = "m%i" % (tilt)
+        elif tilt >= 0: ang = "p%i" % (tilt)
+
+        fake_instr = "_".join(["NISP", grism, ang])
+        print(fake_instr)
         
-        if all_zodi:
-            zodi_file = all_zodi[i]
-            print(zodi_file)
-            hdu_zodi = pyfits.open(zodi_file)
-            zodi = hdu_zodi[ext].data
-        else:
-            zodi = 0.0
-        
+        #if all_zodi:
+        #    zodi_file = all_zodi[i]
+        #    print(zodi_file)
+        #    hdu_zodi = pyfits.open(zodi_file)
+        #    zodi = hdu_zodi[ext].data
+        #else:
+        #    zodi = 0.0
         
         ext = 0
         #hdu[ext].header['INSTRUME'] = 'NISP' 
-        hdu[ext].header['INSTRUME'] = 'NISP-GLWv1' 
+        #hdu[ext].header['INSTRUME'] = 'NISP-GLWv1' 
+        hdu[ext].header['INSTRUME'] = fake_instr
         # v2:
         # - optical model looks the same for each detector
         # - sensitivity for each detector (are they different?)
@@ -180,21 +305,21 @@ for j,single_frame in enumerate(all_slitless):
         
         ext = 1
         #hdu[ext].header['INSTRUME'] = 'NISP'
-        hdu[ext].header['INSTRUME'] = 'NISP-GLWv1'
+        #hdu[ext].header['INSTRUME'] = 'NISP-GLWv1'
+        hdu[ext].header['INSTRUME'] = fake_instr
         hdu[ext].header['FILTER'] = 'RED'
         #hdu[ext].header['FILTER'] = fake_filter
         hdu[ext].header['EXTVER'] = ext
         hdu[ext].header['EXPTIME'] = spec_exptime
         
-        sci = hdu[ext].data
+        #sci = hdu[ext].data
         #hdu[ext].data = sci/spec_exptime/gain
         #hdu[ext].data = (sci-1024.)/spec_exptime/spec_gain
-        hdu[ext].data = (1.0*sci - 1.0*zodi)/spec_exptime/spec_gain
+        #hdu[ext].data = (1.0*sci - 1.0*zodi)/spec_exptime/spec_gain
         
-        
-        ext = 2
-        chi2 = hdu[ext].data
-        hdu[ext].data = np.sqrt(chi2)/spec_exptime/spec_gain
+        #ext = 2
+        #chi2 = hdu[ext].data
+        #hdu[ext].data = np.sqrt(chi2)/spec_exptime/spec_gain
         
         hdu.writeto(new_slitless_file, overwrite=True, output_verify='fix')
         print("Writing",new_slitless_file)
@@ -599,7 +724,11 @@ with open('all_phot_matched_clean.pickle', 'wb') as f:
     # Pickle the 'data' dictionary using the highest protocol available.
     pickle.dump(all_phot_matched_clean, f, pickle.HIGHEST_PROTOCOL)
 
+yaml_dict['all_slitless'] = all_slitless
+#yaml_dict['all_zodi'] = all_zodi
 yaml_dict["all_final_slitless"] = all_final_slitless
+yaml_dict['spec_exptime'] = spec_exptime
+yaml_dict['spec_gain'] = spec_gain
 
 os.chdir(YAML_PATH)
 with open(os.path.basename(yaml_file), 'w',) as f:
